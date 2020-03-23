@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        windows 下搭建shadowsocks 服务端｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2017/04/24/shadowsocks-for-windows-server/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">windows 下搭建shadowsocks 服务端</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>windows 下搭建shadowsocks 服务端</h1>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2017-04-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>Linux下搭建服务端已经非常常见了，今天尝试在windows 下搭建shadowsocks 服务现将记录如下</p>
+<h2 id="一、下载-libQtShadowsocks"><a href="#一、下载-libQtShadowsocks" class="headerlink" title="一、下载 libQtShadowsocks"></a>一、下载 libQtShadowsocks</h2><p>Windows服务端软件下载地址</p>
+<p><a href="https://github.com/shadowsocks/libQtShadowsocks/releases" target="_blank" rel="noopener">https://github.com/shadowsocks/libQtShadowsocks/releases</a></p>
+<p>根据自己电脑系统版本下载对应的版本，下载后进行解压</p>
+<p>得到文件  shadowsocks-libqss.exe</p>
+<h2 id="二、配置相关文件"><a href="#二、配置相关文件" class="headerlink" title="二、配置相关文件"></a>二、配置相关文件</h2><p>在程序目录下创建名为 config.json 配置文件<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">    <span class="string">"server"</span>:<span class="string">"0.0.0.0"</span>,</span><br><span class="line">    <span class="string">"server_port"</span>:<span class="number">8023</span>,</span><br><span class="line">    <span class="string">"local_address"</span>:<span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="string">"local_port"</span>:<span class="number">1080</span>,  </span><br><span class="line">    <span class="string">"password"</span>:<span class="string">"your password"</span>,</span><br><span class="line">    <span class="string">"timeout"</span>:<span class="number">600</span>,</span><br><span class="line">    <span class="string">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">    <span class="string">"http_proxy"</span>: <span class="literal">false</span>,  </span><br><span class="line">    <span class="string">"auth"</span>: <span class="literal">false</span>  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、创建启动脚本"><a href="#三、创建启动脚本" class="headerlink" title="三、创建启动脚本"></a>三、创建启动脚本</h2><p>在同目录下创建 shadowsocks.bat 启动脚本，内容如下：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">@echo off  </span><br><span class="line">shadowsocks-libqss.exe -c config.json -S</span><br></pre></td></tr></table></figure></p>
+<p>然后运行 shadowsocks.bat 即可，关闭时就关闭批处理就行了，很简单</p>
+<h2 id="四、隐藏bat窗口"><a href="#四、隐藏bat窗口" class="headerlink" title="四、隐藏bat窗口"></a>四、隐藏bat窗口</h2><p>运行后上面那个黑色的窗口一直存在，太影响正常使用了<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">Set ws = CreateObject(&quot;Wscript.Shell&quot;)  </span><br><span class="line">ws.run &quot;cmd /c shadowsocks.bat&quot;,vbhide</span><br></pre></td></tr></table></figure></p>
+<p>运行shadowsocks.vbs 即可</p>
+<p>(完)</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/05/05/JS输出二维数组所有组合拼接的函数/" data-toggle="tooltip" data-placement="top" title="JS输出二维数组所有组合拼接的函数">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/04/16/ShadowSocks-for-linux-server/" data-toggle="tooltip" data-placement="top" title="在CentOS上安装ShadowSocks服务端">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、下载-libQtShadowsocks"><span class="toc-text">一、下载 libQtShadowsocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、配置相关文件"><span class="toc-text">二、配置相关文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、创建启动脚本"><span class="toc-text">三、创建启动脚本</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、隐藏bat窗口"><span class="toc-text">四、隐藏bat窗口</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

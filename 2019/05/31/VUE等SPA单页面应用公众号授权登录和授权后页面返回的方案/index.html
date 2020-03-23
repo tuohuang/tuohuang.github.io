@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        SPA应用公众号授权登录和授权后页面返回的方案｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2019/05/31/VUE等SPA单页面应用公众号授权登录和授权后页面返回的方案/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">SPA应用公众号授权登录和授权后页面返回的方案</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>SPA应用公众号授权登录和授权后页面返回的方案</h1>
+                    
+                    <h2 class="subheading">VUE等SPA单页面应用公众号授权登录和授权后页面返回的方案</h2>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2019-05-31
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#VUE" title="VUE">VUE</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>以前开发微信公众号授权登录都是由后端来完成，但是最近在开发单页面应用时，页面路由不走后台，在网上查找了一些资料，了解了授权登录的原理，便自己封装的一个前端授权登录的模块。授权登录比较顺利完成了，但是遇见了授权完成后返回页面的问题，由于授权成功后微信会跳转到用户设置的redirect_uri链接，在按返回键返回的时候又会返回到微信授权的链接，造成了死循环。所以经过层层怕坑，决心写下此文章，做个记录。</p>
+<h2 id="第一步：用户同意授权，获取code"><a href="#第一步：用户同意授权，获取code" class="headerlink" title="第一步：用户同意授权，获取code"></a>第一步：用户同意授权，获取code</h2><p>我是在收到后台返回code值为需要授权登录的时候跳转到登录页面，在登录页面先判断连接中是否有code，如果没有跳转授权链接。<br>在确保微信公众账号拥有授权作用域（scope参数）的权限的前提下（服务号获得高级接口后，默认拥有scope参数中的snsapi_base和snsapi_userinfo），引导关注者打开如下页面：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">https://open.weixin.qq.com/connect/oauth2/authorize?appid=APPID&amp;redirect_uri=REDIRECT_URI&amp;response_type=code&amp;scope=SCOPE&amp;state=STATE#wechat_redirect</span><br><span class="line">若提示“该链接无法访问”，请检查参数是否填写错误，是否拥有scope参数对应的授权作用域权限。</span><br></pre></td></tr></table></figure></p>
+<p>以上链接中的appid时申请公众号获得的appid，redirect_uri是用户授权登录成功后需要跳转的链接，需要注意的是redirect_uri需要使用 urlEncode 进行处理，其他参数请查看微信官方文档<a href="https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842" target="_blank" rel="noopener">https://mp.weixin.qq.com/wiki?t=resource/res_main&amp;id=mp1421140842</a></p>
+<h2 id="第二步：获取授权登录成功跳转链接中的code值"><a href="#第二步：获取授权登录成功跳转链接中的code值" class="headerlink" title="第二步：获取授权登录成功跳转链接中的code值"></a>第二步：获取授权登录成功跳转链接中的code值</h2><p>可以使用一下函数获取链接中的所有参数<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUrlParams</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> url = location.search; <span class="comment">//获取url携带的参数</span></span><br><span class="line">    <span class="keyword">var</span> urlParams = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">    <span class="keyword">if</span> (url.indexOf(<span class="string">"?"</span>) != <span class="number">-1</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> str = url.substr(<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">var</span> strs = str.split(<span class="string">"&amp;"</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; strs.length; i ++) &#123;</span><br><span class="line">            urlParams[strs[i].split(<span class="string">"="</span>)[<span class="number">0</span>]]=<span class="built_in">unescape</span>(strs[i].split(<span class="string">"="</span>)[<span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> urlParams;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>getUrlParams().code便是我们需要得到的内容</p>
+<h2 id="第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息"><a href="#第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息" class="headerlink" title="第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息"></a>第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息</h2><p>有了code我们就可以发送给后台，后台通过code解析出用户信息并生成用户和用户的token返回给前端，这个时候前端需要将token和用户信息保存下来，我是使用本地存储保存的token，用vuex来保存用户信息。</p>
+<h2 id="第四步返回之前的页面"><a href="#第四步返回之前的页面" class="headerlink" title="第四步返回之前的页面"></a>第四步返回之前的页面</h2><p>因为跳转授权链接之前我是先跳转下一个专门的登录页面，所按道理说应该向前返回3个页面，分别为：第一次跳转的登录页面，微信授权的页面，微信授权成功后跳转的链接（这里我配置的是登陆页面），故使用 <code>history.go(-3);</code> 返回。这在开发者工具中每什么问题，可以返回之前的页面，但是在手机上却不行，经过尝试发现手机只需要向前返回两个页面，但是考虑为了开发方便或者可能其他的手机或其他版本的微信需要向前返回3个页面，所又想了一方法不管怎么样都能返回到之前的页面的方法，方法就是在登录页面（第一次跳转的页面中判断是否又存储的token，有的话就再返回一次），哈哈，机智，骚操作~~~</p>
+<p>总结：<br>为了方便自己封装了一个模块：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> wxApi = &#123;</span><br><span class="line">    appid:<span class="string">"*****"</span>,</span><br><span class="line">    urlencode: <span class="function"><span class="keyword">function</span>(<span class="params">url</span>)</span>&#123;</span><br><span class="line">        url = (url + <span class="string">''</span>).toString();</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">encodeURIComponent</span>(url).replace(<span class="regexp">/!/g</span>, <span class="string">'%21'</span>).replace(<span class="regexp">/'/g</span>, <span class="string">'%27'</span>).replace(<span class="regexp">/\(/g</span>, <span class="string">'%28'</span>).  </span><br><span class="line">        replace(<span class="regexp">/\)/g</span>, <span class="string">'%29'</span>).replace(<span class="regexp">/\*/g</span>, <span class="string">'%2A'</span>).replace(<span class="regexp">/%20/g</span>, <span class="string">'+'</span>);  </span><br><span class="line">    &#125;,</span><br><span class="line">    author: <span class="function"><span class="keyword">function</span>(<span class="params">redirect_uri</span>)</span>&#123;</span><br><span class="line">        redirect_uri = <span class="keyword">this</span>.urlencode(redirect_uri)</span><br><span class="line">        <span class="keyword">var</span> url = <span class="string">"https://open.weixin.qq.com/connect/oauth2/authorize?appid="</span> + <span class="keyword">this</span>.appid + <span class="string">"&amp;redirect_uri="</span> + redirect_uri + <span class="string">"&amp;response_type=code"</span>  + <span class="string">"&amp;scope=snsapi_userinfo"</span> + <span class="string">"&amp;state=STATE#wechat_redirect"</span>;</span><br><span class="line">        <span class="built_in">window</span>.location.href = url;</span><br><span class="line">    &#125;,</span><br><span class="line">    getUrlParams: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> url = location.search; <span class="comment">//获取url携带的参数</span></span><br><span class="line">        <span class="keyword">var</span> urlParams = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        <span class="keyword">if</span> (url.indexOf(<span class="string">"?"</span>) != <span class="number">-1</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> str = url.substr(<span class="number">1</span>);</span><br><span class="line">            <span class="keyword">var</span> strs = str.split(<span class="string">"&amp;"</span>);</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; strs.length; i ++) &#123;</span><br><span class="line">                urlParams[strs[i].split(<span class="string">"="</span>)[<span class="number">0</span>]]=<span class="built_in">unescape</span>(strs[i].split(<span class="string">"="</span>)[<span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> urlParams;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    wxApi</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用方法：</p>
+<ol>
+<li>引用模块</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;wxApi&#125; <span class="keyword">from</span> <span class="string">"../common/wxApi.js"</span></span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>判断本地是否有taoke,有的话返回上一页</li>
+</ol>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(localStorage.getItem(<span class="string">'token'</span>))&#123;</span><br><span class="line">    history.go(<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>判断当前页的链接是否有code值<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(wxApi.getUrlParams().code!=<span class="literal">undefined</span>)&#123; <span class="comment">//如果获取到了微信code,则执行获取token的接口，拿到token需要往前返回两个页面</span></span><br><span class="line">    <span class="keyword">this</span>.getToken(wxApi.getUrlParams().code)</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 如果没有code则跳转到微信的授权页面</span></span><br><span class="line"><span class="keyword">const</span> redirect_uri = config.apiDomain + <span class="string">"/login"</span>;</span><br><span class="line">wxApi.author(redirect_uri)</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>总的代码就是：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123;wxApi&#125; <span class="keyword">from</span> <span class="string">"../common/wxApi.js"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    data() &#123;</span><br><span class="line">        <span class="keyword">return</span> &#123;&#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    created()&#123;</span><br><span class="line">        <span class="keyword">if</span>(localStorage.getItem(<span class="string">'token'</span>))&#123;</span><br><span class="line">            history.go(<span class="number">-1</span>);</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(wxApi.getUrlParams().code!=<span class="literal">undefined</span>)&#123;</span><br><span class="line">            <span class="keyword">this</span>.getToken(wxApi.getUrlParams().code)</span><br><span class="line">            <span class="keyword">return</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">const</span> redirect_uri = config.apiDomain + <span class="string">"/login"</span>;</span><br><span class="line">        wxApi.author(redirect_uri)</span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line">        getToken(code)&#123;</span><br><span class="line">            <span class="keyword">this</span>.$ajax.get(<span class="string">""</span>, &#123;code&#125;, res =&gt; &#123;</span><br><span class="line">                <span class="keyword">if</span>(res.data.code == <span class="number">1</span>) &#123;</span><br><span class="line">                    localStorage.setItem(<span class="string">"token"</span>, res.data.token);</span><br><span class="line">                    history.go(<span class="number">-2</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>完结。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/06/03/git合并分支时忽略合并部分文件/" data-toggle="tooltip" data-placement="top" title="git合并分支时忽略合并部分文件">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2019/05/21/本地生成ssh公钥免密登录linux/" data-toggle="tooltip" data-placement="top" title="本地生成ssh公钥免密登录Linux">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第一步：用户同意授权，获取code"><span class="toc-text">第一步：用户同意授权，获取code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二步：获取授权登录成功跳转链接中的code值"><span class="toc-text">第二步：获取授权登录成功跳转链接中的code值</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息"><span class="toc-text">第三步：将code通过ajax发送给后台获取后台传递过来的token和其他用户信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第四步返回之前的页面"><span class="toc-text">第四步返回之前的页面</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#VUE" title="VUE">VUE</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        设置搜索引擎收录与不收录的两种方法｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2017/10/26/设置搜索引擎收录与不收录/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">设置搜索引擎收录与不收录的两种方法</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>设置搜索引擎收录与不收录的两种方法</h1>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2017-10-26
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#SEO"
+                           title="SEO">SEO</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在一些情况下为了SEO我们要设置网站的某些页面不被搜索引擎收录，例如我们的后台登陆页面等等，所以通过网络查阅现整理了两种方法，一种是通过网站根目录的Robots.txt文件设置，另一种是在html页面的都不设置meta标签的方法。</p>
+<h3 id="第一种方法：Robots-txt"><a href="#第一种方法：Robots-txt" class="headerlink" title="第一种方法：Robots.txt"></a>第一种方法：Robots.txt</h3><p>搜索引擎使用spider程序自动访问互联网上的网页并获取网页信息。spider在访问一个网站时，会首先会检查该网站的根域下是否有一个叫做 robots.txt的纯文本文件，这个文件用于指定spider在您网站上的抓取范围。您可以在您的网站中创建一个robots.txt，在文件中声明 该网站中不想被搜索引擎收录的部分或者指定搜索引擎只收录特定的部分。</p>
+<p>请注意，仅当您的网站包含不希望被搜索引擎收录的内容时，才需要使用robots.txt文件。如果您希望搜索引擎收录网站上所有内容，请勿建立robots.txt文件。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">作用</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">禁止所有搜索引擎访问网站的任何部分</td>
+<td>User-agent: *<br>Disallow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">允许所有的robot访问</td>
+<td>User-agent: *<br>Allow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">仅禁止Baiduspider访问您的网站</td>
+<td>User-agent:<br>Baiduspider<br>Disallow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">仅允许Baiduspider访问您的网站</td>
+<td>User-agent:<br>Baiduspider<br>Allow: /<br>User-agent: *<br>Disallow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">仅允许Baiduspider以及Googlebot访问</td>
+<td>User-agent:<br>Baiduspider<br>Allow: /<br>User-agent:<br>Googlebot<br>Allow: /<br>User-agent:<br>* Disallow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">禁止spider访问特定目录<br></td>
+<td>User-agent: *<br>Disallow: /cgi-bin/<br>Disallow: /tmp/<br>Disallow: /~joe/</td>
+</tr>
+<tr>
+<td style="text-align:left">允许访问特定目录中的部分url</td>
+<td>User-agent: *<br>Allow: /cgi-bin/see<br>Allow: /tmp/hi<br>Allow:/~joe/look<br>Disallow: /cgi-bin/<br>Disallow: /tmp/<br>Disallow: /~joe/<br></td>
+</tr>
+<tr>
+<td style="text-align:left">使用”*”限制访问url<br>禁止访问/cgi-bin/目录下的所有以”.htm”为后缀的URL(包含子目录)。</td>
+<td>User-agent: <em> <br>Disallow: /cgi-bin/</em>.htm</td>
+</tr>
+<tr>
+<td style="text-align:left">使用”$”限制访问url<br>仅允许访问以”.htm”为后缀的URL。</td>
+<td>User-agent: <em><br>Allow: /</em>.htm$<br>Disallow: /</td>
+</tr>
+<tr>
+<td style="text-align:left">禁止Baiduspider抓取网站上所有图片(仅允许抓取网页)</td>
+<td>User-agent: <br>Baiduspider<br>Disallow: /<em>.jpg$<br>Disallow: /</em>.jpeg$<br>Disallow: /<em>.gif$<br>Disallow: /</em>.png$<br>Disallow: /*.bmp$</td>
+</tr>
+<tr>
+<td style="text-align:left">仅允许Baiduspider抓取网页和.gif格式图片</td>
+<td>User-agent: <br>Baiduspider<br>Allow: /<em>.gif$<br>Disallow: /</em>.jpg$<br>Disallow: /<em>.jpeg$<br>Disallow: /</em>.png$<br>Disallow: /*.bmp$</td>
+</tr>
+<tr>
+<td style="text-align:left">仅禁止Baiduspider抓取.jpg格式图片</td>
+<td>User-agent: <br>Baiduspider<br>Disallow: /*.jpg$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="第二种方法：meta标签"><a href="#第二种方法：meta标签" class="headerlink" title="第二种方法：meta标签"></a>第二种方法：meta标签</h3><p>如果您不想搜索引擎追踪此网页上的链接，且不传递链接的权重，在<head><meta name="generator" content="Hexo 3.8.0">与</head>加入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;META NAME=&quot;Baiduspider&quot; CONTENT=&quot;NOINDEX,Nofollow,noarchive&quot;&gt;</span><br></pre></td></tr></table></figure></p>
+<p>就可以限制所有的搜索引擎建立你的网页快照。</p>
+<p>必须了解搜索引起抓取页面相关的命令：<br>INDEX命令：告诉搜索引擎抓取这个页面<br>FOLLOW命令：告诉搜索引擎可以从这个页面上找到链接，然后继续访问抓取下去。<br>NOINDEX命令：告诉搜索引擎不允许抓取这个页面<br>NOFOLLOW命令：告诉搜索引擎不允许从此页找到链接、拒绝其继续访问。</p>
+<p>根据以上的命令，我们就有了一下的四种组合<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;META NAME=&quot;Robots&quot; CONTENT=&quot;INDEX,FOLLOW&quot;&gt;：可以抓取本页，而且可以顺着本页继续索引别的链接 </span><br><span class="line">&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;NOINDEX,FOLLOW&quot;&gt;：不许抓取本页，但是可以顺着本页抓取索引别的链接 </span><br><span class="line">&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;INDEX,NOFOLLOW&quot;&gt;：可以抓取本页，但是不许顺着本页抓取索引别的链接 </span><br><span class="line">&lt;META NAME=&quot;ROBOTS&quot; CONTENT=&quot;NOINDEX,NOFOLLOW&quot;&gt;：不许抓取本页，也不许顺着本页抓取索引别的链接。</span><br><span class="line">同时在加上禁止显示快照的代码&lt;metaname=&quot;robots&quot;content=&quot;noarchive&quot;&gt;就OK</span><br></pre></td></tr></table></figure></p>
+<p>（完）</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/12/02/移动端网页适配方案/" data-toggle="tooltip" data-placement="top"
+                           title="移动端网页适配最佳解决方案">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/09/04/301重定向/" data-toggle="tooltip" data-placement="top"
+                           title="使用.Htaccess文件实现301重定向常用的七种方法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一种方法：Robots-txt"><span class="toc-text">第一种方法：Robots.txt</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二种方法：meta标签"><span class="toc-text">第二种方法：meta标签</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#SEO"
+                           title="SEO">SEO</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        CentOS安装Apache和PHP｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2017/05/17/centos安装apache/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">CentOS安装Apache和PHP</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>CentOS安装Apache和PHP</h1>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2017-05-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/tags/#Apache" title="Apache">Apache</a>
+                        
+                        <a class="tag" href="/tags/#PHP" title="PHP">PHP</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="导语"><a href="#导语" class="headerlink" title="导语"></a>导语</h2><p>一个 LAMP 软件栈通常由多个开源软件组合而成，它们合力驱动一个服务器去运行 web 站点和应用。LAMP 这个术语实际上是一个由 Linux 操作系统，Apache web 服务器，MySQL 数据库服务器，以及 PHP 编程环境组合缩略而成的。</p>
+<p>在这篇指南中，我们将为一个搭载 CentOS 7 操作系统的服务器安装 LAMP 软件栈。CentOS 已经满足了 LAMP 软件栈的第一个需求：一个 Linux 操作系统。</p>
+<h2 id="第一步——安装Apache"><a href="#第一步——安装Apache" class="headerlink" title="第一步——安装Apache"></a>第一步——安装Apache</h2><p>安装 Apache 只需要在 CentOS 命令终端敲入这条命令就行了：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install httpd -y</span><br></pre></td></tr></table></figure></p>
+<p>安装成功后执行下面的命令来开启 Apache 服务：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo systemctl enable httpd.service</span><br></pre></td></tr></table></figure></p>
+<p>CentOS7.0以下版本需要如下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">chkconfig --level 3 httpd on //开机启动</span><br></pre></td></tr></table></figure></p>
+<p>你可以通过重新启动服务器，然后在命令行终端中敲入这条命令来验证 Apache 服务是否在服务器启动时自动开启了：<br>重启Linux:</p>
+<ol>
+<li>reboot</li>
+<li>shutdown -r now 立刻重启(root用户使用)</li>
+<li>shutdown -r 10 过10分钟自动重启(root用户使用)</li>
+<li>shutdown -r 20:35 在时间为20:35时候重启(root用户使用)<br>如果是通过shutdown命令设置重启的话，可以用shutdown -c命令取消重启<br>然后：<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo systemctl is-enabled httpd.service</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>如果你看到了这样的响应：</p>
+<p>enabled</p>
+<p>则说明 Apache 服务已经配置为在服务器启动时自动开启了。</p>
+<p>在服务器上启动 Apache 服务的命令为：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$sudo systemctl start httpd.service</span><br></pre></td></tr></table></figure></p>
+<p>重新启动 Apache：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$sudo systemctl restart httpd.service</span><br></pre></td></tr></table></figure></p>
+<p>停止 Apache：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$sudo systemctl stop httpd.service</span><br></pre></td></tr></table></figure></p>
+<p>CentOS7.0以下版本需要如下命令：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">service httpd start 启动</span><br><span class="line">service httpd restart 重新启动</span><br><span class="line">service httpd stop 停止服务</span><br></pre></td></tr></table></figure></p>
+<p>如果你的服务器正在运行防火墙，请运行下列命令以允许它进行 HTTP 和 HTTPS 通信：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$sudo firewall-cmd --permanent --zone=public --add-service=http</span><br><span class="line"></span><br><span class="line">$sudo firewall-cmd --permanent --zone=public --add-service=https</span><br><span class="line"></span><br><span class="line">$sudo firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+<p>在 Apache 启动的情况下，你可以在浏览器里访问服务器的公网 IP 地址以验证一切如计划那样顺利地进行（如果你现在还不知道如何获取服务器的公网 IP 地址，请参考下一标题中的内容）：</p>
+<p>http://&lt;服务器的公网 IP 地址&gt;/</p>
+<p>你将会看到一个出于通知和测试目的而存在的默认 CentOS 7 Apache 网页。它应该长这样子：<br><img src="https://cdn.1024yun.com/apache.png" alt="Apache信息页面"><br>如果你使用的是阿里云服务器的网络是专有网络则可能访问不成功，因为阿里云的专有网络需要在在安全组里面放行80端口如下：<br><img src="https://cdn.1024yun.com/anquanzu.png" alt="安全组页面"><br>如果不是阿里云的专有网络则可能是服务器默认开启了防火墙，且防火墙没有设置80端口：<br>开启防火墙：</p>
+<h2 id="firewalld的配置"><a href="#firewalld的配置" class="headerlink" title="firewalld的配置"></a>firewalld的配置</h2><h3 id="1、firewalld的基本使用"><a href="#1、firewalld的基本使用" class="headerlink" title="1、firewalld的基本使用"></a>1、firewalld的基本使用</h3><p>启动： systemctl start firewalld<br>查看状态： systemctl status firewalld<br>停止： systemctl disable firewalld<br>禁用： systemctl stop firewalld</p>
+<h3 id="2-systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。"><a href="#2-systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。" class="headerlink" title="2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。"></a>2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</h3><p>启动一个服务：systemctl start firewalld.service<br>关闭一个服务：systemctl stop firewalld.service<br>重启一个服务：systemctl restart firewalld.service<br>显示一个服务的状态：systemctl status firewalld.service<br>在开机时启用一个服务：systemctl enable firewalld.service<br>在开机时禁用一个服务：systemctl disable firewalld.service<br>查看服务是否开机启动：systemctl is-enabled firewalld.service<br>查看已启动的服务列表：systemctl list-unit-files|grep enabled<br>查看启动失败的服务列表：systemctl –failed</p>
+<h3 id="3-配置firewalld-cmd"><a href="#3-配置firewalld-cmd" class="headerlink" title="3.配置firewalld-cmd"></a>3.配置firewalld-cmd</h3><p>查看版本： firewall-cmd –version<br>查看帮助： firewall-cmd –help<br>显示状态： firewall-cmd –state<br>查看所有打开的端口： firewall-cmd –zone=public –list-ports<br>更新防火墙规则： firewall-cmd –reload<br>查看区域信息:  firewall-cmd –get-active-zones<br>查看指定接口所属区域： firewall-cmd –get-zone-of-interface=eth0<br>拒绝所有包：firewall-cmd –panic-on<br>取消拒绝状态： firewall-cmd –panic-off<br>查看是否拒绝： firewall-cmd –query-panic</p>
+<h3 id="4-添加、查看、删除端口"><a href="#4-添加、查看、删除端口" class="headerlink" title="4.添加、查看、删除端口"></a>4.添加、查看、删除端口</h3><p>添加<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent    //（--permanent永久生效，没有此参数重启后失效）</span><br></pre></td></tr></table></figure></p>
+<p>重新载入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure></p>
+<p>查看<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone= public --query-port=80/tcp</span><br></pre></td></tr></table></figure></p>
+<p>删除<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">firewall-cmd --zone= public --remove-port=80/tcp --permanent</span><br></pre></td></tr></table></figure></p>
+<h2 id="第二步-——-安装-PHP"><a href="#第二步-——-安装-PHP" class="headerlink" title="第二步 —— 安装 PHP"></a>第二步 —— 安装 PHP</h2><p>执行下面的命令安装php<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$yum install php -y</span><br></pre></td></tr></table></figure></p>
+<p>安装成功后执行如下命令查看php的版本和php的模块<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">php -v</span><br><span class="line">php -m</span><br></pre></td></tr></table></figure></p>
+<p>为了增强 PHP 的功能，我们可以选择性地安装一些额外的模块。</p>
+<p>在命令行终端敲入这条命令，你就可以找到所有可以获取到的 PHP 模块选项和库：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ yum search php</span><br></pre></td></tr></table></figure></p>
+<p>响应的结果就是所有你能够选择安装的组件。其中包含了每个可选组件的描述：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">php-bcmath.x86_64 : A module for PHP applications for using the bcmath library</span><br><span class="line"></span><br><span class="line">php-cli.x86_64 : Command-line interface for PHP</span><br><span class="line"></span><br><span class="line">php-common.x86_64 : Commonfiles for PHP</span><br><span class="line"></span><br><span class="line">php-dba.x86_64 : Adatabase abstraction layer module for PHP applications</span><br><span class="line"></span><br><span class="line">php-devel.x86_64 : Filesneeded for building PHP extensions</span><br><span class="line"></span><br><span class="line">php-embedded.x86_64 : PHPlibrary for embedding in applications</span><br><span class="line"></span><br><span class="line">php-enchant.x86_64 : Enchantspelling extension for PHP applications</span><br><span class="line"></span><br><span class="line">php-fpm.x86_64 : PHPFastCGI Process Manager</span><br><span class="line"></span><br><span class="line">php-gd.x86_64 : Amodule for PHP applications for using the gd graphics library</span><br><span class="line">......</span><br></pre></td></tr></table></figure></p>
+<p>如果需要获取每个模块更多的信息，你可以通过互联网搜索，或者直接在命令行终端中敲入这条命令查看：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ yum info package_name</span><br></pre></td></tr></table></figure></p>
+<p>响应中将会包含许多的信息，其中一个名为 Description 的域包含了这个模块提供的功能更为详尽的描述。</p>
+<p>举个例子，如果要获知 php-fpm 模块的功能，我们只要在命令行终端中敲入下列指令就可以了：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ yum info php-fpm</span><br></pre></td></tr></table></figure></p>
+<p>顺着众多其他信息往下看，你将会找到形如这样的信息：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">......</span><br><span class="line">Summary    : PHPFastCGI Process Manager</span><br><span class="line"></span><br><span class="line">URL            : http://www.php.net/</span><br><span class="line"></span><br><span class="line">License       : PHPand Zend and BSD</span><br><span class="line"></span><br><span class="line">Description : PHP-FPM (FastCGI Process Manager) is an alternative PHP FastCGI</span><br><span class="line"></span><br><span class="line">                   : implementation with some additional features useful for sites of</span><br><span class="line"></span><br><span class="line">                   : any size, especially busier sites.</span><br></pre></td></tr></table></figure></p>
+<p>在考究之后，如果你决定要安装一个模块包，你可以像我们之前安装其他软件时的做法一样，使用 yum install 命令达到目的。</p>
+<p>如果我们决定了 php-fpm 就是我们需要的，那么我们可以在命令行终端键入：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install php-fpm</span><br></pre></td></tr></table></figure></p>
+<p>如果你想安装多于 1 个的模块包，你可以在命令行终端中键入 yum install 后，列出你想安装的每个模块包，并使用空格区分，就像下面这样子，一般来说安装以下模块包就足够了：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo yum install php-mysql php-gd libjpeg* php-imap php-ldap php-odbc php-pear php-xml php-iconv php-xmlrpc php-mbstring php-mcrypt php-bcmath php-mhash libmcrypt -y</span><br></pre></td></tr></table></figure></p>
+<p>现在，你的 LAMP 软件栈已经安装并配置妥当了。但我们仍需要测试一下 PHP。</p>
+<h2 id="第三步-——-测试你-Web-服务器上的-PHP-处理程序"><a href="#第三步-——-测试你-Web-服务器上的-PHP-处理程序" class="headerlink" title="第三步 —— 测试你 Web 服务器上的 PHP 处理程序"></a>第三步 —— 测试你 Web 服务器上的 PHP 处理程序</h2><p>为了测试系统已经配置得适合 PHP 运行，我们可以创建一个非常简易的 PHP 脚本。</p>
+<p>我们将这个脚本命名为 info.php。为了让 Apache 能够正确地找到并为之服务，它必须保存在一个称为『web 目录』特殊的目录中。</p>
+<p>在 CentOS 7 中，这个目录位于 /var/www/html/。我们可以通过下面这条命令在此创建一个文件：<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ sudo vi /var/www/html/info.php</span><br></pre></td></tr></table></figure></p>
+<p>这将会打开一个空白文件，敲击小写字母 I 即可进行编辑。我们想在文件中输入下列 PHP 代码组成的文本：</p>
+<p>&lt;?php phpinfo(); ?&gt;</p>
+<p>然后，敲击 ESC 键并键入 :wq! 即可保存并关闭这个文件。</p>
+<p>现在我们可以测试 web 服务器是否能够正确地显示由 PHP 脚本生成的内容了。我们可以尝试通过 web 浏览器访问这个页面。你需要再次获取服务器的公网 IP 地址。</p>
+<p>你希望访问的地址就是：</p>
+<p>http://&lt;服务器的公网 IP 地址&gt;/info.php</p>
+<p>你看到的页面应该像下面这样子：</p>
+<p><img src="https://cdn.1024yun.com/phpInfo.png" alt="phpInfo"></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/05/24/Windows-for-React Native-Dev/" data-toggle="tooltip" data-placement="top" title="Windows系统下搭建React Native环境">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/05/05/JS输出二维数组所有组合拼接的函数/" data-toggle="tooltip" data-placement="top" title="JS输出二维数组所有组合拼接的函数">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#导语"><span class="toc-text">导语</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第一步——安装Apache"><span class="toc-text">第一步——安装Apache</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#firewalld的配置"><span class="toc-text">firewalld的配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、firewalld的基本使用"><span class="toc-text">1、firewalld的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。"><span class="toc-text">2.systemctl是CentOS7的服务管理工具中主要的工具，它融合之前service和chkconfig的功能于一体。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-配置firewalld-cmd"><span class="toc-text">3.配置firewalld-cmd</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-添加、查看、删除端口"><span class="toc-text">4.添加、查看、删除端口</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第二步-——-安装-PHP"><span class="toc-text">第二步 —— 安装 PHP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第三步-——-测试你-Web-服务器上的-PHP-处理程序"><span class="toc-text">第三步 —— 测试你 Web 服务器上的 PHP 处理程序</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        
+                        <a class="tag" href="/tags/#Apache" title="Apache">Apache</a>
+                        
+                        <a class="tag" href="/tags/#PHP" title="PHP">PHP</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

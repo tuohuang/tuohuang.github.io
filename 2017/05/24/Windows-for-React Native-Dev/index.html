@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        Windows系统下搭建React Native环境｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2017/05/24/Windows-for-React Native-Dev/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">Windows系统下搭建React Native环境</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>Windows系统下搭建React Native环境</h1>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2017-05-24
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="一、开发环境搭建要求"><a href="#一、开发环境搭建要求" class="headerlink" title="一、开发环境搭建要求"></a>一、开发环境搭建要求</h2><p>在Windows操作系统搭建React Native开发环境要求在电脑上安装好JDK,Android SDK,还要求电脑上安装有一套C++编译器，如果没有，推荐安装微软的VIsual Studio Community 2015 Android的开发环境Android Studio(推荐)或者Eclipse在混合开发中也需要用到</p>
+<h2 id="二、环境搭建步骤"><a href="#二、环境搭建步骤" class="headerlink" title="二、环境搭建步骤"></a>二、环境搭建步骤</h2><h3 id="第一步：安装JDK"><a href="#第一步：安装JDK" class="headerlink" title="第一步：安装JDK"></a>第一步：安装JDK</h3><h4 id="1-安装JAVA-JDK（需安装1-8或更高版本）"><a href="#1-安装JAVA-JDK（需安装1-8或更高版本）" class="headerlink" title="1.安装JAVA JDK（需安装1.8或更高版本）"></a>1.安装JAVA JDK（需安装1.8或更高版本）</h4><p>去Oracle的官网上下载安装包<a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" target="_blank" rel="noopener">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a> 然后安装。第一次是安装 jdk ，第二次是安装 jre 。建议两个都安装在同一个java文件夹中的不同文件夹中。</p>
+<h4 id="2-JDK环境变量配置"><a href="#2-JDK环境变量配置" class="headerlink" title="2.JDK环境变量配置"></a>2.JDK环境变量配置</h4><p>(1)选择  计算机→属性→高级系统设置→高级→环境变量</p>
+<p>(2)系统变量→新建 JAVA_HOME 变量 。变量值填写jdk的安装目录（我的是 D:\Program Files\Java\jdk1.8.0_131)</p>
+<p>(3)系统变量→寻找 Path 变量→编辑,在变量值最后输入%JAVA_HOME%\bin;%JAVA_HOME%\jre\bin;</p>
+<p>(4)系统变量→新建 CLASSPATH 变量。变量值填写.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar（注意最前面有一点）</p>
+<p>(5)检验是否配置成功 运行cmd 输入 java -version （java 和 -version 之间有空格）。若如图所示 显示版本信息 则说明安装和配置成功。<br><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">PS C:\Users\tuohuang&gt;  java -version</span><br><span class="line">java version "<span class="number">1</span>.<span class="number">8</span>.<span class="number">0</span>_131"</span><br><span class="line">Java(TM) SE Runtime Environment (build <span class="number">1</span>.<span class="number">8</span>.<span class="number">0</span>_131-b11)</span><br><span class="line">Java HotSpot(TM) <span class="number">64</span>-Bit Server VM (build <span class="number">25</span>.<span class="number">131</span>-b11, mixed <span class="built_in">mode</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="第二步：安装Android环境"><a href="#第二步：安装Android环境" class="headerlink" title="第二步：安装Android环境"></a>第二步：安装Android环境</h3><p>我们先去Google的开发者网站<a href="https://developer.android.google.cn/studio/index.html" target="_blank" rel="noopener">https://developer.android.google.cn/studio/index.html</a> 上下载Android Studio。</p>
+<p>安装完成后，在Android Studio的欢迎界面中选择Configure =&gt; SDK Manager。<br>在SDK Platforms窗口中，选择Show Package Details，然后勾选Android 6.0下的Google APIs，Android SDK Platform 23，Intel x86 Atom_64 System Image还有Google APIs Intel x86 Atom_64 System Image。<br><img src="https://cdn.1024yun.com/SDK%20Platforms.png" alt="SDK Platforms"><br>在SDK Tools窗口中，选择Show Package Details，然后在Android SDK Build Tools中勾选Android SDK Build-Tools 23.0.1。（必须是这个版本）<br><img src="https://cdn.1024yun.com/SDK%20Tools.png" alt="SDK Tools"><br>ANDROID_HOME环境变量<br>确保ANDROID_HOME环境变量正确地指向了你安装的Android SDK的路径。<br>打开控制面板 -&gt; 系统和安全 -&gt; 系统 -&gt; 高级系统设置 -&gt; 高级 -&gt; 环境变量 -&gt; 新建<br>我的路径是：D:\Android\sdk（安装Android Studio的时候可以自己选择路径）;然后PATH增加如下内容 %ANDROID_HOME%\platforms;%ANDROID_HOME%\platform-tools;%ANDROID_HOME%\tools;<br>设置完成后将手机与电脑通过数据线相连。（打开开发者调试模式）在命令行窗口输入“adb devices”如果手机上已经安装了正确的驱动程序并且打开了调试模式，则会显示你已经连接的设备：<br><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">PS C:\Users\tuohuang&gt; adb devices</span><br><span class="line">List of devices attached</span><br><span class="line"><span class="number">192</span>.<span class="number">168</span>.<span class="number">25</span>.<span class="number">101</span>:<span class="number">5555</span>     device</span><br></pre></td></tr></table></figure></p>
+<h3 id="第三步：其他环境配置"><a href="#第三步：其他环境配置" class="headerlink" title="第三步：其他环境配置"></a>第三步：其他环境配置</h3><p>建议安装上Python 2.7,有些可能不装也没事   下载地址  <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">https://www.python.org/downloads/</a>   安装git   安装React-native需要用到git，如果没有配置git，需要先下载对应的客户端   下载地址：<a href="https://git-for-windows.github.io/" target="_blank" rel="noopener">https://git-for-windows.github.io/</a></p>
+<h3 id="第四步：RN环境设置和搭建"><a href="#第四步：RN环境设置和搭建" class="headerlink" title="第四步：RN环境设置和搭建"></a>第四步：RN环境设置和搭建</h3><h4 id="1-下载稳定版-nodejs-v5-7-0-Stable下载网站-https-nodejs-org-en"><a href="#1-下载稳定版-nodejs-v5-7-0-Stable下载网站-https-nodejs-org-en" class="headerlink" title="1. 下载稳定版 nodejs v5.7.0 Stable下载网站 https://nodejs.org/en/"></a>1. 下载稳定版 nodejs v5.7.0 Stable下载网站 <a href="https://nodejs.org/en/" target="_blank" rel="noopener">https://nodejs.org/en/</a></h4><h4 id="2-安装后命令行输入npm测试是否成功"><a href="#2-安装后命令行输入npm测试是否成功" class="headerlink" title="2. 安装后命令行输入npm测试是否成功"></a>2. 安装后命令行输入npm测试是否成功</h4><h4 id="3-React-Developer-Tools安装"><a href="#3-React-Developer-Tools安装" class="headerlink" title="3. React Developer Tools安装"></a>3. React Developer Tools安装</h4><h4 id="4-安装React-Native。在终端中执行"><a href="#4-安装React-Native。在终端中执行" class="headerlink" title="4. 安装React Native。在终端中执行"></a>4. 安装React Native。在终端中执行</h4><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">npm install -g react-native-cli</span><br></pre></td></tr></table></figure>
+<p>react-native-cli是一个终端命令，它可以完成其余的设置工作。它可以通过npm安装。刚才这条命令会往你的终端安装一个叫做react-native的命令。这个安装过程你只需要进行一次。</p>
+<p>然后安装Yarn<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install yarn -g</span><br></pre></td></tr></table></figure></p>
+<h2 id="三、创建并启动APP"><a href="#三、创建并启动APP" class="headerlink" title="三、创建并启动APP"></a>三、创建并启动APP</h2><p>在启动App之前，我们得创建一个新的项目在终端输入<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">react-native init 项目名</span><br></pre></td></tr></table></figure></p>
+<p>可能会很慢，等等就好，大概200多M的文件,一次不成功，也可以尝试着多试几次或者直接到GitHub上去下载一个初始化项目。<br>进入上面使用init命令建立的项目名称目录下 ，新的npm包会包含更新在运行react-nativeinit命令生成的一些动态文件，例如init创建项目的时候会生成iOS和Android的子项目，我们可以通过以下的命令进行获取最新的代码<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">react-native upgrade</span><br></pre></td></tr></table></figure></p>
+<p>然后执行一下代码来启动项目<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">react-native run-android</span><br></pre></td></tr></table></figure></p>
+<p>需要耐心等待一段时间，如果出现以下内容则说明运行成功了：<br><figure class="highlight bat"><table><tr><td class="code"><pre><span class="line">......</span><br><span class="line">:app:transformResourcesWithMergeJavaResForDebug UP-TO-<span class="built_in">DATE</span></span><br><span class="line">:app:validateSigningDebug</span><br><span class="line">:app:packageDebug UP-TO-<span class="built_in">DATE</span></span><br><span class="line">:app:assembleDebug UP-TO-<span class="built_in">DATE</span></span><br><span class="line">:app:installDebug</span><br><span class="line">Installing APK 'app-debug.apk' on 'Custom Phone - <span class="number">4</span>.<span class="number">4</span>.<span class="number">4</span> - API <span class="number">19</span> - <span class="number">768</span>x1280 - <span class="number">4</span>.<span class="number">4</span>.<span class="number">4</span>' <span class="keyword">for</span> app:debug</span><br><span class="line">Installed on <span class="number">1</span> device.</span><br><span class="line"></span><br><span class="line">BUILD SUCCESSFUL</span><br><span class="line"></span><br><span class="line">Total <span class="built_in">time</span>: <span class="number">40</span>.<span class="number">866</span> secs</span><br><span class="line">Starting the app on <span class="number">192</span>.<span class="number">168</span>.<span class="number">25</span>.<span class="number">101</span>:<span class="number">5555</span> (D:\Android\sdk/platform-tools/adb -s <span class="number">192</span>.<span class="number">168</span>.<span class="number">25</span>.<span class="number">101</span>:<span class="number">5555</span> shell am <span class="built_in">start</span> -n com.meituan/.MainActivity)...</span><br><span class="line"><span class="function">Starting: <span class="title">Intent</span> &#123; <span class="title">cmp</span>=<span class="title">com.meituan</span>/.<span class="title">MainActivity</span> &#125;</span></span><br></pre></td></tr></table></figure></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/06/10/office365申请/" data-toggle="tooltip" data-placement="top" title="免费申请企业级1年期Office 365订阅权限">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/05/17/centos安装apache/" data-toggle="tooltip" data-placement="top" title="CentOS安装Apache和PHP">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、开发环境搭建要求"><span class="toc-text">一、开发环境搭建要求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、环境搭建步骤"><span class="toc-text">二、环境搭建步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#第一步：安装JDK"><span class="toc-text">第一步：安装JDK</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-安装JAVA-JDK（需安装1-8或更高版本）"><span class="toc-text">1.安装JAVA JDK（需安装1.8或更高版本）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-JDK环境变量配置"><span class="toc-text">2.JDK环境变量配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第二步：安装Android环境"><span class="toc-text">第二步：安装Android环境</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三步：其他环境配置"><span class="toc-text">第三步：其他环境配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第四步：RN环境设置和搭建"><span class="toc-text">第四步：RN环境设置和搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-下载稳定版-nodejs-v5-7-0-Stable下载网站-https-nodejs-org-en"><span class="toc-text">1. 下载稳定版 nodejs v5.7.0 Stable下载网站 https://nodejs.org/en/</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-安装后命令行输入npm测试是否成功"><span class="toc-text">2. 安装后命令行输入npm测试是否成功</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-React-Developer-Tools安装"><span class="toc-text">3. React Developer Tools安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-安装React-Native。在终端中执行"><span class="toc-text">4. 安装React Native。在终端中执行</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、创建并启动APP"><span class="toc-text">三、创建并启动APP</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#React Native" title="React Native">React Native</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

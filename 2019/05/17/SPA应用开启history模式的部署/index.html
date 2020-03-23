@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        SPA应用开启history模式的部署｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2019/05/17/SPA应用开启history模式的部署/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">SPA应用开启history模式的部署</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>SPA应用开启history模式的部署</h1>
+                    
+                    <h2 class="subheading">SPA应用开启history模式且部署在二级目录下时nginx和apache服务器配置</h2>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2019-05-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h2 id="修改vue的路由配置"><a href="#修改vue的路由配置" class="headerlink" title="修改vue的路由配置"></a>修改vue的路由配置</h2><h3 id="1、修改router-js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）"><a href="#1、修改router-js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）" class="headerlink" title="1、修改router.js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）"></a>1、修改router.js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">    base: <span class="string">"/m/"</span>,</span><br><span class="line">    mode: <span class="string">"history"</span>,</span><br><span class="line">    routes: []</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="修改服务器配置文件"><a href="#修改服务器配置文件" class="headerlink" title="修改服务器配置文件"></a>修改服务器配置文件</h2><h3 id="1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改"><a href="#1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改" class="headerlink" title="1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改"></a>1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen 80;</span><br><span class="line">    server_name www.domain.com ;</span><br><span class="line">    root   <span class="string">"/www/wwwroot/xxx"</span>;</span><br><span class="line">    location / &#123;</span><br><span class="line">            index  index.html index.htm index.php;</span><br><span class="line">        <span class="keyword">if</span> (!-e <span class="variable">$request_filename</span>)&#123;</span><br><span class="line">                rewrite  ^(.*)$  /index.php?s=<span class="variable">$1</span>  last;   <span class="built_in">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    location /m &#123;</span><br><span class="line">        try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /m/index.html;</span><br><span class="line">    &#125;</span><br><span class="line">    location ~ \.php(.*)$ &#123;</span><br><span class="line">        fastcgi_pass   127.0.0.1:9000;</span><br><span class="line">        fastcgi_index  index.php;</span><br><span class="line">        fastcgi_split_path_info  ^((?U).+\.php)(/?.+)$;</span><br><span class="line">        fastcgi_param  SCRIPT_FILENAME  <span class="variable">$document_root</span><span class="variable">$fastcgi_script_name</span>;</span><br><span class="line">        fastcgi_param  PATH_INFO  <span class="variable">$fastcgi_path_info</span>;</span><br><span class="line">        fastcgi_param  PATH_TRANSLATED  <span class="variable">$document_root</span><span class="variable">$fastcgi_path_info</span>;</span><br><span class="line">        include        fastcgi_params;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上文件添加内容为：<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /m &#123;</span><br><span class="line">    try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /m/index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="1、修改apache服务器配置文件，打开站点根目录的-htaccess文件，添加以下内容"><a href="#1、修改apache服务器配置文件，打开站点根目录的-htaccess文件，添加以下内容" class="headerlink" title="1、修改apache服务器配置文件，打开站点根目录的.htaccess文件，添加以下内容"></a>1、修改apache服务器配置文件，打开站点根目录的.htaccess文件，添加以下内容</h3><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;IfModule mod_rewrite.c&gt;</span><br><span class="line"> RewriteEngine on</span><br><span class="line"> RewriteBase /</span><br><span class="line"> RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line"> RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line"> RewriteRule ^(m+.*)$ /m/index.html [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure>
+<p>注：如果网站之前配置过伪静态，好像不能在之前的配置内容添加<code>RewriteRule ^(m+.*)$ /m/index.html [L]</code>，需要在其原有内容上面添加上面一整块代码</p>
+<p>还有一种方案，前端页面单独部署，绑定域名可以使用接口的域名但是要修改端口号，例如：接口域名：<a href="http://www.api.com，前端页面绑定域名：www.api.com:81，或者使用其他域名，这个时候需要配置接口域名所对应的程序的反向代理,配置如下：" target="_blank" rel="noopener">www.api.com，前端页面绑定域名：www.api.com:81，或者使用其他域名，这个时候需要配置接口域名所对应的程序的反向代理,配置如下：</a></p>
+<p>apache:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">&lt;IfModule mod_proxy.c&gt;</span><br><span class="line">    ProxyRequests Off</span><br><span class="line">    SSLProxyEngine on</span><br><span class="line">    ProxyPass /m http://www.api.com:81/</span><br><span class="line">    ProxyPassReverse /m http://www.api.com:81/</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
+<p>nginx:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /m/ &#123;</span><br><span class="line">    proxy_pass  http://www.api.com:81/;</span><br><span class="line">    proxy_redirect  off;</span><br><span class="line">    proxy_set_header Host <span class="variable">$host</span>;</span><br><span class="line">    proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">    proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将<a href="http://www.api.com/m代理到www.api.com:81，同时前端项目所在网站需要如下设置：" target="_blank" rel="noopener">www.api.com/m代理到www.api.com:81，同时前端项目所在网站需要如下设置：</a><br>apache:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"> &lt;IfModule mod_rewrite.c&gt;</span><br><span class="line"> RewriteEngine on</span><br><span class="line"> RewriteBase /</span><br><span class="line"> RewriteCond %&#123;REQUEST_FILENAME&#125; !-d</span><br><span class="line"> RewriteCond %&#123;REQUEST_FILENAME&#125; !-f</span><br><span class="line"> RewriteRule ^(.*)$ /index.html [L]</span><br><span class="line">&lt;/IfModule&gt;</span><br></pre></td></tr></table></figure></p>
+<p>nginx:<br><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">location /m &#123;</span><br><span class="line">    try_files <span class="variable">$uri</span> <span class="variable">$uri</span>/ /index.html;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第二种方案相对第一种接口请求要慢不少，应为中间有个代理层，我估计如果在服务器内部将项目域名用host指向本地应该回合第一种速度差不多，毕竟代理直接就走内网了。<br>（完）</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/05/18/html2canvas绘制图片时解决图片跨域问题/" data-toggle="tooltip" data-placement="top" title="html2canvas绘制图片时解决图片跨域问题">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/12/02/移动端网页适配方案/" data-toggle="tooltip" data-placement="top" title="移动端网页适配最佳解决方案">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#修改vue的路由配置"><span class="toc-text">修改vue的路由配置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、修改router-js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）"><span class="toc-text">1、修改router.js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改服务器配置文件"><span class="toc-text">修改服务器配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改"><span class="toc-text">1、修改nginx服务器配置文件，找到站点对应的配置文件做如下修改</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1、修改apache服务器配置文件，打开站点根目录的-htaccess文件，添加以下内容"><span class="toc-text">1、修改apache服务器配置文件，打开站点根目录的.htaccess文件，添加以下内容</span></a></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

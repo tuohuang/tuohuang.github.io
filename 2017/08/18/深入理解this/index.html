@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        深入理解“this”｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://tuohuang.github.io/2017/08/18/深入理解this/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">深入理解“this”</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>深入理解“this”</h1>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2017-08-18
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <p>在平时的代码中，相信大家经常用到 this，可是你真的明白此 this 真的是你认为的 this 吗？今天柚子君总结了一下平时用到的 this 的场景，大家走过路过不要错过啊～</p>
+<p>首先咱们先来看一下《JavaScript 高级程序设计》上是怎么说的。</p>
+<blockquote>
+<p>this 对象是在运行时基于函数的执行环境绑定的：在全局函数中，this 等于 windows，而当函数被作为某个对象的方法调用时，this 等于那个对象。</p>
+</blockquote>
+<p>还有一种情况，在《深入理解 ES6》一书中写道:</p>
+<blockquote>
+<p>如果箭头函数被非箭头函数包含，则 this 绑定的是最近一层非箭头函数的 this，且不能通过 call()、apply() 或 bind() 方法来改变 this 的值。<br>首先看一下非箭头函数的情况：</p>
+</blockquote>
+<h3 id="一、普通函数调用"><a href="#一、普通函数调用" class="headerlink" title="一、普通函数调用"></a>一、普通函数调用</h3><p>这是一个普通的函数声明，在这种情况下，this 是指向 window 的。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="string">'哈哈哈'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">thisHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'test:'</span>,<span class="keyword">this</span>.test,<span class="string">'this:'</span>,<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    thisHandler() <span class="comment">// test: 哈哈哈 this: window</span></span><br></pre></td></tr></table></figure>
+<p>其实上面的代码就相当于 window 调用 thisHandler()，所以这时 this 指向 window：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> b = <span class="string">'哈哈哈'</span>;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">thisHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'b:'</span>,<span class="keyword">this</span>.b,<span class="string">'this:'</span>,<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">window</span>.thisHandler() <span class="comment">// b: 哈哈哈 this: window</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="二、作为对象的方法调用"><a href="#二、作为对象的方法调用" class="headerlink" title="二、作为对象的方法调用"></a>二、作为对象的方法调用</h3><p>当作为对象的方法被调用时，this 这时就指向调用它的对象。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> thisHandler = &#123;</span><br><span class="line">  name: <span class="string">"柚子"</span>,</span><br><span class="line">  test: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'my name:'</span>,<span class="keyword">this</span>.name); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">thisHandler.test() <span class="comment">// my name: 柚子</span></span><br></pre></td></tr></table></figure>
+<p>再来一个栗子🌰：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> thisHandler = &#123;</span><br><span class="line">  name: <span class="string">"柚子"</span>,</span><br><span class="line">  fn: &#123;</span><br><span class="line">    name: <span class="string">'芒果'</span>,</span><br><span class="line">    test: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">'my name:'</span>,<span class="keyword">this</span>.name); </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">thisHandler.fn.test() <span class="comment">// my name: 芒果</span></span><br></pre></td></tr></table></figure>
+<p>这时 this 指向的是对象 fn 了，所以，关于对象调用这一点明白了吗，如果明白了，那没关系，接着看下一个强化题😏：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'柚子'</span></span><br><span class="line"><span class="keyword">var</span> thisHandler = &#123;</span><br><span class="line">  name: <span class="string">"芒果"</span>,</span><br><span class="line">  fn: &#123;</span><br><span class="line">    name: <span class="string">'糖果'</span>,</span><br><span class="line">    test: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'my name:'</span>,<span class="keyword">this</span>.name); </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> testHandler = thisHandler.fn.test</span><br><span class="line">testHandler()</span><br></pre></td></tr></table></figure>
+<p>🍭 这里是一秒钟分割线 🍭</p>
+<p>哒哒哒，答对了，这里的 this 指向的 window，那么这是为什么呢，哪位小盆友来回答一下。<br>举手：</p>
+<blockquote>
+<p>上面说到了，this 指向的是最后调用它的对象，第一步是赋值给了 testHandler，最后执行的那一句相当于 window.testHandler()。所以这里的 this 指向的是 window。最后输出的就是 my name: 柚子。</p>
+</blockquote>
+<p>哒哒哒，真聪明，来闯下一关～</p>
+<h3 id="三、构造函数的调用"><a href="#三、构造函数的调用" class="headerlink" title="三、构造函数的调用"></a>三、构造函数的调用</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'柚子'</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Bar</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">'芒果'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> handlerA = <span class="keyword">new</span> Bar();</span><br><span class="line"><span class="built_in">console</span>.log(handlerA.name);  <span class="comment">// 芒果</span></span><br><span class="line"><span class="built_in">console</span>.log(name) <span class="comment">// 柚子</span></span><br></pre></td></tr></table></figure>
+<p>其实要明白为什么会是这样一个结果，咱们就要来聊聊 new 做了哪些事情。</p>
+<ul>
+<li>创建类的实例。这步是把一个空的对象的 <strong>proto</strong> 属性设置为 Bar.prototype。</li>
+<li>初始化实例。函数 Bar 被传入参数并调用，关键字 this 被设定为该实例。</li>
+<li>返回实例。</li>
+</ul>
+<p>弄明白了 new 的工作内容，自然而然的也明白了上面输出的原因。</p>
+<blockquote>
+<p>Bar() 中的 this 指向对象 handlerA，并不是全局对象。</p>
+</blockquote>
+<h3 id="四、apply-call-调用"><a href="#四、apply-call-调用" class="headerlink" title="四、apply / call 调用"></a>四、apply / call 调用</h3><p>关于 apply，可以看一下 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply" target="_blank" rel="noopener">MDN 关于 apply() 方法的说明</a>。</p>
+<p>使用 apply 方法可以改变 this 的指向。如果这个函数处于非严格模式下，则指定为 null 或 undefined 时会自动指向全局对象（浏览器中就是window对象）。</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'芒果'</span>;</span><br><span class="line"><span class="keyword">var</span> thisHandler = &#123;</span><br><span class="line">  name: <span class="string">"柚子"</span>,</span><br><span class="line">  test: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'my name:'</span>,<span class="keyword">this</span>.name); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">thisHandler.test(); <span class="comment">//  my name: 柚子</span></span><br><span class="line">thisHandler.test.apply(); <span class="comment">// my name: 芒果</span></span><br></pre></td></tr></table></figure>
+<p>下面是箭头函数的舞台～</p>
+<h3 id="五、箭头函数"><a href="#五、箭头函数" class="headerlink" title="五、箭头函数"></a>五、箭头函数</h3><p>在《深入理解 ES6》一书中可以知道箭头函数和普通函数的一个不同之处就在于 this 的绑定。</p>
+<blockquote>
+<p>箭头函数中没有 this 绑定，必须通过查找作用域链来决定其值。如果箭头函数被非箭头函数包含，则 this 绑定的是最近一层非箭头函数的 this；否则，this 的值会被设置为 undefined。</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = <span class="string">'柚子'</span></span><br><span class="line"><span class="keyword">var</span> thisHandler = &#123;</span><br><span class="line">  name: <span class="string">'芒果'</span>,</span><br><span class="line">  test:<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'my name:'</span>,<span class="keyword">this</span>.name,<span class="string">'this:'</span>,<span class="keyword">this</span>); </span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">thisHandler.test(); <span class="comment">// my name: 柚子 this: Window</span></span><br></pre></td></tr></table></figure>
+<p>这时 this 不是指向 thisHandler，而是 Window。</p>
+<p>关于 this 的使用和体会还是要在平时运用中理解，先了解其原理，那么在使用的时候就如鱼得水啦。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2017/09/04/301重定向/" data-toggle="tooltip" data-placement="top" title="使用.Htaccess文件实现301重定向常用的七种方法">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2017/06/21/解决win10 远程连接提示用户名或密码错误问题/" data-toggle="tooltip" data-placement="top" title="Windows 10远程桌面时，用户名密码无误，仍然提示不正确的解决办法">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、普通函数调用"><span class="toc-text">一、普通函数调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、作为对象的方法调用"><span class="toc-text">二、作为对象的方法调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、构造函数的调用"><span class="toc-text">三、构造函数的调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、apply-call-调用"><span class="toc-text">四、apply / call 调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、箭头函数"><span class="toc-text">五、箭头函数</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://tuohuang.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>
