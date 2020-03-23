@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        JS输出二维数组所有组合拼接的函数｜拓荒
+        Ubuntu安装和使用nvm｜拓荒
         
     </title>
 
-    <link rel="canonical" href="https://www.1024yun.com/2017/05/05/JS输出二维数组所有组合拼接的函数/">
+    <link rel="canonical" href="https://www.1024yun.com/2020/03/23/Ubuntu安装和使用nvm/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,7 +71,7 @@
         <!-- /.navbar-collapse -->
         <div id="huxblog_navbar">
             <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
-                <span class="page-post-title hide">JS输出二维数组所有组合拼接的函数</span>
+                <span class="page-post-title hide">Ubuntu安装和使用nvm</span>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/">首页</a>
@@ -181,17 +181,19 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>JS输出二维数组所有组合拼接的函数</h1>
+                    <h1>Ubuntu安装和使用nvm</h1>
+                    
+                    <h2 class="subheading">Ubuntu下安装和使用nvm</h2>
                     
                     <span class="meta">
                          作者 拓荒
                         <span>
-                          日期 2017-05-05
+                          日期 2020-03-23
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
                         
                     </div>
                 </div>
@@ -206,25 +208,22 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>在做一个商品发布功能的时候遇到需要选择规格的功能，且规格可能是多个，每个又有多个规格值，多个规格之间搭配还可能有多种价格和库存，如下图：<br><img src="https://cdn.1024yun.com/select-guige.png" alt="示例图"><br>首先想到的是当每个规格中都有选中的选项的时候将选中的数据以二位数组的形式先存起来；<br>先声明一个数组：<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>();</span><br></pre></td></tr></table></figure></p>
-<p>获取规格类型的数量和声明一个用来计数的变量<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> guigeCell = <span class="built_in">document</span>.getElementsByClassName(<span class="string">"guige-cell"</span>);</span><br><span class="line"><span class="keyword">var</span> guigeCellNum = guigeCell.length;</span><br><span class="line"><span class="keyword">var</span> j = <span class="number">0</span>;</span><br></pre></td></tr></table></figure></p>
-<p>当点击一个规格值的时候给这个规格加上一个class(selected)，这个class既可以是选中后的样式也可以用来标记这个规格有值被选中了，然后让 j 加一；<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> (<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">this</span>.className===<span class="string">'unit-item-option'</span>)&#123;</span><br><span class="line">        <span class="keyword">this</span>.className = <span class="string">'unit-item-option selected'</span>;</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.className = <span class="string">'unit-item-option'</span>;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;guigeCellNum;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(guigeCell[i].getElementsByClassName(<span class="string">"selected"</span>).length!=<span class="number">0</span>)&#123;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="comment">//判断所有的规格是否都有被选中的项,然后将每个规格中的值再以数组的形式存储</span></span><br><span class="line">    <span class="keyword">if</span>(j===guigeCellNum)&#123;</span><br><span class="line">        <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;guigeCellNum;i++)&#123;</span><br><span class="line">            arr[i]=<span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line">            <span class="keyword">for</span>(z=<span class="number">0</span>;z&lt;guigeCell[i].getElementsByClassName(<span class="string">"selected"</span>).length;z++)&#123;</span><br><span class="line">                arr[i].push(guigeCell[i].getElementsByClassName(<span class="string">"selected"</span>)[z].innerText)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最后得到的arr就是一个二维数组[[“白色”,”红色”],[“M”],[“XXL”],[“套餐一”]]，对应上面的图片应该是这样：<br><img src="https://cdn.1024yun.com/guige-console-log1.png" alt="控制台输出日志"><br>然后就是处理arr这个数组，让这个二维数组里面的值相互拼接在生成另一个数组[[“白色”,”M”,”套餐一”],[“白色”,”XXL”,”套餐一”],[“红色”,”M”,”套餐一”],[“红色”,”XXL”,”套餐一”]]<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> len = arr.length;</span><br><span class="line"><span class="comment">//声明一个新的数组</span></span><br><span class="line"><span class="keyword">var</span> results = [];</span><br><span class="line"><span class="keyword">var</span> indexs = &#123;&#125;;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">specialSort</span>(<span class="params">start</span>) </span>&#123;</span><br><span class="line">    start++;</span><br><span class="line">    <span class="keyword">if</span> (start &gt; len - <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!indexs[start]) &#123;</span><br><span class="line">        indexs[start] = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (!(arr[start] <span class="keyword">instanceof</span> <span class="built_in">Array</span>)) &#123;</span><br><span class="line">        arr[start] = [arr[start]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (indexs[start] = <span class="number">0</span>; indexs[start] &lt; arr[start].length; indexs[start]++) &#123;</span><br><span class="line">        specialSort(start);</span><br><span class="line">        <span class="keyword">if</span> (start == len - <span class="number">1</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> temp = [];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = len - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">                <span class="keyword">if</span> (!(arr[start - i] <span class="keyword">instanceof</span> <span class="built_in">Array</span>)) &#123;</span><br><span class="line">                    arr[start - i] = [arr[start - i]];</span><br><span class="line">                &#125;</span><br><span class="line">                temp.push(arr[start - i][indexs[start - i]]);</span><br><span class="line">            &#125;</span><br><span class="line">            results.push(temp);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">specialSort(<span class="number">-1</span>);</span><br></pre></td></tr></table></figure></p>
-<p>数组results就是最终得到的结果，可以将其打印出来看一下<br><img src="https://cdn.1024yun.com/guige-console-log2.png" alt="控制台输出日志"></p>
-<p>（完）</p>
+                <h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>下载安装脚本，可以使用cURL或Wget，最新版本可以到github查看<a href="https://github.com/nvm-sh/nvm" target="_blank" rel="noopener">https://github.com/nvm-sh/nvm</a><br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>查看是否已经安装好<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvm --version</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>查看可供安装的版本<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvm ls-remote</span><br></pre></td></tr></table></figure></p>
+<p>安装一个nodejs版本<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvm install v12.16.1</span><br></pre></td></tr></table></figure></p>
+<p>查看本地安装的版本<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvm ls</span><br></pre></td></tr></table></figure></p>
+<p>使用一个版本<br><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">nvm use v10.19.0</span><br></pre></td></tr></table></figure></p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2017/05/17/centos安装apache/" data-toggle="tooltip" data-placement="top" title="CentOS安装Apache和PHP">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2017/04/24/shadowsocks-for-windows-server/" data-toggle="tooltip" data-placement="top" title="windows 下搭建shadowsocks 服务端">Next Post &rarr;</a>
+                        <a href="/2020/03/21/Ubuntu升级Git版本/" data-toggle="tooltip" data-placement="top" title="Ubuntu升级Git版本">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -237,7 +236,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#安装"><span class="toc-text">安装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -259,7 +258,7 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#JavaScript" title="JavaScript">JavaScript</a>
+                        <a class="tag" href="/tags/#Nodejs" title="Nodejs">Nodejs</a>
                         
                     </div>
                 </section>
