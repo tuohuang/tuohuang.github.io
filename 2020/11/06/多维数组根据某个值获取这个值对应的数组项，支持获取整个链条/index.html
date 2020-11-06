@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        本地生成ssh公钥免密登录Linux｜拓荒
+        多维数组根据某个值获取这个值对应的数组项，支持获取整个链条｜拓荒
         
     </title>
 
-    <link rel="canonical" href="https://www.1024yun.com/2019/05/21/本地生成ssh公钥免密登录linux/">
+    <link rel="canonical" href="https://www.1024yun.com/2020/11/06/多维数组根据某个值获取这个值对应的数组项，支持获取整个链条/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -71,7 +71,7 @@
         <!-- /.navbar-collapse -->
         <div id="huxblog_navbar">
             <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
-                <span class="page-post-title hide">本地生成ssh公钥免密登录Linux</span>
+                <span class="page-post-title hide">多维数组根据某个值获取这个值对应的数组项，支持获取整个链条</span>
                 <ul class="nav navbar-nav navbar-right">
                     <li>
                         <a href="/">首页</a>
@@ -181,17 +181,19 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>本地生成ssh公钥免密登录Linux</h1>
+                    <h1>多维数组根据某个值获取这个值对应的数组项，支持获取整个链条</h1>
+                    
+                    <h2 class="subheading">多维数组根据某个值获取这个值对应的数组项，支持获这个值所在的整个链条</h2>
                     
                     <span class="meta">
                          作者 拓荒
                         <span>
-                          日期 2019-05-21
+                          日期 2020-11-06
                          </span>
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
                         
                     </div>
                 </div>
@@ -206,39 +208,21 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>ssh是为远程登录提供的一个安全性的协议。使用它可以防止远程管理过程中的信息泄露问题。目前ssh普遍使用的有两种方式：</p>
-<ol>
-<li>基于口令的安全验证:经过验证帐号与密码即可登陆到远程主机。</li>
-<li>基于密钥的安全验证:需要在本地生成”密钥对”后将公钥传送至服务端，进行公共密钥的比较。</li>
-</ol>
-<p>使用密码验证终归会存在着被骇客暴力破解或嗅探监听的危险，使用ssh服务基于密钥进行安全验证（可无需密码验证），相对来说更安全也更方便，同时最近微软的Visual Studio Code推出了VSCode Remote插件，可以用本地的电脑连接远程服务器，使用远程服务器的开发环境进行开发和调试，但是如果没有使用密钥登录服务器的话，很多操作步骤都需要输入服务器密码，所以使用密钥登录服务器即安全也方便，步骤如下：</p>
-<ol>
-<li>安装git客户端，git基本是程序员的标配</li>
-<li>在电脑的用户目录（我使用的是Windows）右键选择Git Bash Hear</li>
-<li>输入<code>ssh-keygen</code>命令并执行，然后一路按“回车”即可</li>
-<li>重新查看我们的用户目录，发现是否多了一个“.ssh”文件夹，且该文件夹下存在两个文件：</li>
-</ol>
-<ul>
-<li>公钥：id_rsa.pub</li>
-<li>私钥：id_rsa</li>
-</ul>
-<ol start="5">
-<li>运行命令 <code>ssh-copy-id root@0.0.0.0</code>(@后面是服务器的ip)，将公钥上传至服务器，该过程最后需要输入用户root的登陆密码</li>
-<li>运行Xshell,用户身份验证选择Public Key，用户密钥选择选择用户目录/.ssh/id_rsa文件，然后连接即可。</li>
-</ol>
+                <p>有个省市区的多维数组，给定一个省或市或区对应的code 找到这个区的名称</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// arr: 数组， id: 省市区的code或id</span></span><br><span class="line">getArea(arr, id)&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;arr.length; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr[i].areaid == id)&#123;</span><br><span class="line">      <span class="keyword">return</span> arr[i]</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(arr[i].children&amp;&amp;arr[i].children.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">      <span class="keyword">let</span> res = <span class="keyword">this</span>.getArea(arr[i].children, id)</span><br><span class="line">      <span class="keyword">if</span>(res)&#123;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>如果要是给定的一个区的code，要求不只是获取这个区的名字还要获取这区对应的省市</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">getAreas(arr, id, areas=[])&#123;</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i&lt;arr.length; i++)&#123;</span><br><span class="line">    <span class="keyword">if</span>(arr[i].areaid == id)&#123;</span><br><span class="line">      areas.push(arr[i])</span><br><span class="line">      <span class="keyword">return</span> areas</span><br><span class="line">      <span class="keyword">break</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(arr[i].children&amp;&amp;arr[i].children.length&gt;<span class="number">0</span>)&#123;</span><br><span class="line">      areas.push(arr[i])</span><br><span class="line">      <span class="keyword">let</span> res = <span class="keyword">this</span>.getAreas(arr[i].children, id, areas)</span><br><span class="line">      <span class="keyword">if</span>(res)&#123;</span><br><span class="line">        <span class="keyword">return</span> res</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 如果上面没有return 则说明当前还没有找到，这个时候需要删除</span></span><br><span class="line">  areas.splice(areas.length<span class="number">-1</span>, <span class="number">1</span>)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这个时候返回的市一个数组，数组前一项是后一项的父级</p>
+<p>完结。</p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2019/05/31/VUE等SPA单页面应用公众号授权登录和授权后页面返回的方案/" data-toggle="tooltip" data-placement="top" title="SPA应用公众号授权登录和授权后页面返回的方案">&larr; Previous Post</a>
-                    </li>
-                    
                     
                     <li class="next">
-                        <a href="/2019/05/18/js获取当前时间戳的4种方法/" data-toggle="tooltip" data-placement="top" title="js获取当前时间戳的4种方法">Next Post &rarr;</a>
+                        <a href="/2020/03/23/Ubuntu安装和使用nvm/" data-toggle="tooltip" data-placement="top" title="Ubuntu安装和使用nvm">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -273,7 +257,7 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Linux" title="Linux">Linux</a>
+                        <a class="tag" href="/tags/#Javascript" title="Javascript">Javascript</a>
                         
                     </div>
                 </section>
