@@ -582,25 +582,6 @@
     
     
     <entry>
-      <title>npm默认安装目录修改</title>
-      <link href="/2017/03/23/npm%E9%BB%98%E8%AE%A4%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%BF%AE%E6%94%B9/"/>
-      <url>/2017/03/23/npm%E9%BB%98%E8%AE%A4%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%BF%AE%E6%94%B9/</url>
-      
-        <content type="html"><![CDATA[<p>查看所有全局安装的模块 <code>npm ls -g</code><br>查看npm默认设置（部分） <code>npm config ls</code><br>查看npm默认设置（全部） <code>npm config ls -l</code><br>以下两种方法来修改npm的默认安装目录</p><ol><li>使用命令 <code>npm config set prefix &quot;D:\Program Files\nodejs\node_global&quot;</code> 来修改npm默认的安装目录</li><li>修改npm文件夹下的npmrc文件，打开修改里面的内容，原来的内容删掉，写入 <code>prefix=D:\Program Files\nodejs\node_global  cache=D:\Program Files\nodejs\node_cache</code></li></ol><p>当安装完模块后还不能用，因为改变了默认的路径，需要修改系统的环境变量配置去让命令行识别命令，这里分为用户变量和系统变量。先在用户变量里面新建明为PATH的变量，值为D:\Program Files\nodejs\node_global。然后在系统变量里面新建一个叫NODE_PATH的变量，值为D:\Program Files\nodejs\node_global\node_modules，这个值是node_global下的node_modules文件夹的路径，以后安装的全局模块就在这里，（这个文件夹是安装完任何一个模块后才会出现，所以配置环境变量前要随便先安装一个模块）</p><p>最后关于cnpm我现在是不想用它了之前用它遇到过安装不成功的，现在换了默认地址安装完它后愣是不能使用，所幸还有其他办法，很简单一句话：<code>npm config set registry https://registry.npm.taobao.org</code> 这句话就可以设置npm也是从国内淘宝镜像来下载安装模块了。</p>]]></content>
-      
-      
-      
-        <tags>
-            
-            <tag> npm </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>第一个markdown文章</title>
       <link href="/2017/03/23/markdown/"/>
       <url>/2017/03/23/markdown/</url>
@@ -612,6 +593,25 @@
         <tags>
             
             <tag> Life </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>npm默认安装目录修改</title>
+      <link href="/2017/03/23/npm%E9%BB%98%E8%AE%A4%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%BF%AE%E6%94%B9/"/>
+      <url>/2017/03/23/npm%E9%BB%98%E8%AE%A4%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95%E4%BF%AE%E6%94%B9/</url>
+      
+        <content type="html"><![CDATA[<p>查看所有全局安装的模块 <code>npm ls -g</code><br>查看npm默认设置（部分） <code>npm config ls</code><br>查看npm默认设置（全部） <code>npm config ls -l</code><br>以下两种方法来修改npm的默认安装目录</p><ol><li>使用命令 <code>npm config set prefix &quot;D:\Program Files\nodejs\node_global&quot;</code> 来修改npm默认的安装目录</li><li>修改npm文件夹下的npmrc文件，打开修改里面的内容，原来的内容删掉，写入 <code>prefix=D:\Program Files\nodejs\node_global  cache=D:\Program Files\nodejs\node_cache</code></li></ol><p>当安装完模块后还不能用，因为改变了默认的路径，需要修改系统的环境变量配置去让命令行识别命令，这里分为用户变量和系统变量。先在用户变量里面新建明为PATH的变量，值为D:\Program Files\nodejs\node_global。然后在系统变量里面新建一个叫NODE_PATH的变量，值为D:\Program Files\nodejs\node_global\node_modules，这个值是node_global下的node_modules文件夹的路径，以后安装的全局模块就在这里，（这个文件夹是安装完任何一个模块后才会出现，所以配置环境变量前要随便先安装一个模块）</p><p>最后关于cnpm我现在是不想用它了之前用它遇到过安装不成功的，现在换了默认地址安装完它后愣是不能使用，所幸还有其他办法，很简单一句话：<code>npm config set registry https://registry.npm.taobao.org</code> 这句话就可以设置npm也是从国内淘宝镜像来下载安装模块了。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> npm </tag>
             
         </tags>
       
