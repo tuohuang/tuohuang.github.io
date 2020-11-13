@@ -92,16 +92,16 @@
                     
                         
 							
-                        <li>
-                            <a href="/tags/">标签</a>
-                        </li>
-							
+                                
+                            
 						
                     
                         
 							
-                                
-                            
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
 						
                     
 					
@@ -328,6 +328,35 @@
 
 
 <div class="post-preview " style="background-image: url('https://cdn.1024yun.com/def_img.jpg')">
+    <a href="/2020/11/13/vue-cli3打包配置优化/">
+        <h2 class="post-title">
+            vue-cli3打包配置优化
+        </h2>
+        <p class="post-meta">
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-11-13
+        </p>
+        
+        <h3 class="post-subtitle">
+            vue-cli3打包配置优化，避免单个文件过大。
+        </h3>
+        
+        <div class="post-content-preview">
+            <p>
+                使用cdn引入不改变的第三方库
+配置vue.config.js
+const cdn = &#123;  // 需要忽略打包的第三方库  externals: &#123;    vue: 'Vue',    vuex: 'Vuex',    'vue-router': 'VueRouter', ..
+            </p>
+        </div>
+    </a>
+
+</div>
+
+<hr>
+
+
+
+
+<div class="post-preview ">
     <a href="/2020/11/06/多维数组根据某个值获取这个值对应的数组项，支持获取整个链条/">
         <h2 class="post-title">
             多维数组根据某个值获取这个值对应的数组项，支持获取整个链条
@@ -509,29 +538,6 @@ sudo add-apt-repository ppa:git-core/ppa
 
 
 
-<div class="post-preview ">
-    <a href="/2019/06/03/SPA单页面应用配置反向代理在本地调试微信公众号/">
-        <h2 class="post-title">
-            SPA单页面应用配置反向代理在本地调试微信公众号
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                微信公众号的开发需要在微信上设置安全域名，所以如果要本地开发，本地的项目域名也应该使用微信上配置的安全域名，刚开始以为只能在服务器端开发，在本地开发不行，就在测试服务器上搭建了nodejs环境，用VsCode新出的远程调试插件链接服务器进行开发，运行npm run dev 得到一个访问地址，然后..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
 <!-- 翻页 pager -->
 
 <ul class="pager">
@@ -617,7 +623,7 @@ sudo add-apt-repository ppa:git-core/ppa
             <section>
                 <div class="site-box is-flex">
                     <div class="flex-1 flex-column center full-height right-line">
-                        <strong>32</strong>
+                        <strong>33</strong>
                         <p>Posts</p>
                     </div>
                     <div class="flex-1 flex-column center full-height">
@@ -639,6 +645,8 @@ sudo add-apt-repository ppa:git-core/ppa
                     
                     
                     <a href="/tags/#Git" title="Git" rel="2">Git</a>
+                    
+                    
                     
                     
                     
@@ -674,7 +682,7 @@ sudo add-apt-repository ppa:git-core/ppa
                     
                     
                     
-                    
+                    <a href="/tags/#Vue" title="Vue" rel="2">Vue</a>
                     
                     
                     

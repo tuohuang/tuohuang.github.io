@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="拓荒的个人博客">
+    <meta name="keyword" content="null">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="tuohuang" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        vue-cli3打包配置优化｜拓荒
+        
+    </title>
+
+    <link rel="canonical" href="https://www.1024yun.com/2020/11/13/vue-cli3打包配置优化/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/blog-style.css">
+
+    <!-- Pygments Github CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+</head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/background_img.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
+" data-ishome="false">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    tuohuang
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse" style="text-align: center;line-height: 60px;height:60px">
+                <span class="page-post-title hide">vue-cli3打包配置优化</span>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">首页</a>
+                    </li>
+					
+                    
+                        
+							
+								
+							
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                                
+                            
+						
+                    
+                        
+							
+                        <li>
+                            <a href="/tags/">标签</a>
+                        </li>
+							
+						
+                    
+					
+						<li>
+							<a href="/archive">归档</a>
+						</li>
+					
+                    
+						<li>
+							<a href="/my-works">作品</a>
+						</li>
+					
+					
+						<li>
+							<a href="/about">关于</a>
+						</li>
+					
+                    
+                    <li>
+						<a href="https://www.naquango.com" target="_blank">淘宝优惠</a>
+					</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+<!-- 
+
+<img class="wechat-title-img"
+     src="https://cdn.1024yun.com/def_img.jpg">
+
+ -->
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.1024yun.com/def_img.jpg')
+    }
+
+    
+</style>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>vue-cli3打包配置优化</h1>
+                    
+                    <h2 class="subheading">vue-cli3打包配置优化，避免单个文件过大。</h2>
+                    
+                    <span class="meta">
+                         作者 拓荒
+                        <span>
+                          日期 2020-11-13
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#Vue" title="Vue">Vue</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <h3 id="使用cdn引入不改变的第三方库"><a href="#使用cdn引入不改变的第三方库" class="headerlink" title="使用cdn引入不改变的第三方库"></a>使用cdn引入不改变的第三方库</h3><ol>
+<li><p>配置vue.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">const</span> cdn = &#123;</span><br><span class="line">  <span class="comment">// 需要忽略打包的第三方库</span></span><br><span class="line">  externals: &#123;</span><br><span class="line">    vue: <span class="string">'Vue'</span>,</span><br><span class="line">    vuex: <span class="string">'Vuex'</span>,</span><br><span class="line">    <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">    axios: <span class="string">'axios'</span></span><br><span class="line">  &#125;,</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 通过cdn方式使用</span></span><br><span class="line">  js: [</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vue/2.6.11/vue.runtime.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vue-router/3.1.2/vue-router.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vuex/3.1.2/vuex.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/axios/0.19.2/axios.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js'</span></span><br><span class="line">  ],</span><br><span class="line"></span><br><span class="line">  css: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">    chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="comment">// 配置cdn引入</span></span><br><span class="line">        config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">          args[<span class="number">0</span>].cdn = cdn</span><br><span class="line">          <span class="keyword">return</span> args</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">         <span class="comment">// 忽略打包配置</span></span><br><span class="line">        config.externals = cdn.externals</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置public/index.html</p>
+</li>
+</ol>
+<figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"utf-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"IE=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"icon"</span> <span class="attr">href</span>=<span class="string">"&lt;%= BASE_URL %&gt;favicon.ico"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;<span class="name">%=</span> <span class="attr">htmlWebpackPlugin.options.title</span> %&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">noscript</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">strong</span>&gt;</span>We're sorry but <span class="tag">&lt;<span class="name">%=</span> <span class="attr">htmlWebpackPlugin.options.title</span> %&gt;</span> doesn't work properly without JavaScript enabled. Please enable it to continue.<span class="tag">&lt;/<span class="name">strong</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">noscript</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--增加以下代码--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> <span class="attr">for</span> (<span class="attr">var</span> <span class="attr">i</span> <span class="attr">in</span> <span class="attr">htmlWebpackPlugin.options.cdn</span> &amp;&amp; <span class="attr">htmlWebpackPlugin.options.cdn.js</span>) &#123; %&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"&lt;%= htmlWebpackPlugin.options.cdn.js[i] %&gt;"</span> <span class="attr">crossorigin</span>=<span class="string">"anonymous"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">%</span> &#125; %&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="移除prefetch插件，避免加载多余的资源"><a href="#移除prefetch插件，避免加载多余的资源" class="headerlink" title="移除prefetch插件，避免加载多余的资源"></a>移除prefetch插件，避免加载多余的资源</h3><p>vue.config.js增加以下代码<br><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移除prefetch插件，避免加载多余的资源</span></span><br><span class="line">    config.plugins.delete(<span class="string">'prefetch'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="定义目录的简写路径"><a href="#定义目录的简写路径" class="headerlink" title="定义目录的简写路径"></a>定义目录的简写路径</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span> (<span class="params">dir</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.join(__dirname, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">      <span class="comment">// 定义文件夹的路径</span></span><br><span class="line">    config.resolve.alias</span><br><span class="line">      .set(<span class="string">'@'</span>, resolve(<span class="string">'src'</span>))</span><br><span class="line">      .set(<span class="string">'assets'</span>, resolve(<span class="string">'src/assets'</span>))</span><br><span class="line">      .set(<span class="string">'components'</span>, resolve(<span class="string">'src/components'</span>))</span><br><span class="line">      .set(<span class="string">'router'</span>, resolve(<span class="string">'src/router'</span>))</span><br><span class="line">      .set(<span class="string">'store'</span>, resolve(<span class="string">'src/store'</span>))</span><br><span class="line">      .set(<span class="string">'views'</span>, resolve(<span class="string">'src/views'</span>))</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="压缩图片"><a href="#压缩图片" class="headerlink" title="压缩图片"></a>压缩图片</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 压缩图片</span></span><br><span class="line">    <span class="keyword">const</span> imagesRule = config.module.rule(<span class="string">'images'</span>)</span><br><span class="line">    imagesRule.uses.clear()</span><br><span class="line">    imagesRule.use(<span class="string">'file-loader'</span>)</span><br><span class="line">        .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">        .options(&#123;</span><br><span class="line">          limit: <span class="number">10240</span>,</span><br><span class="line">          fallback: &#123;</span><br><span class="line">          loader: <span class="string">'file-loader'</span>,</span><br><span class="line">          options: &#123;</span><br><span class="line">            outputPath: <span class="string">'static/images'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用gzip压缩"><a href="#使用gzip压缩" class="headerlink" title="使用gzip压缩"></a>使用gzip压缩</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 需要安装插件</span></span><br><span class="line">npm i compression-webpack-plugin -D</span><br><span class="line"></span><br><span class="line"><span class="comment">// 引入gzip压缩插件</span></span><br><span class="line"><span class="keyword">const</span> CompressionWebpackPlugin = <span class="built_in">require</span>(<span class="string">'compression-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启gzip压缩</span></span><br><span class="line">    config.plugins.push(</span><br><span class="line">      <span class="keyword">new</span> CompressionWebpackPlugin(</span><br><span class="line">        &#123;</span><br><span class="line">          filename: <span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;info.path&#125;</span>.gz<span class="subst">$&#123;info.query&#125;</span>`</span></span><br><span class="line">          &#125;,</span><br><span class="line">          algorithm: <span class="string">'gzip'</span>,</span><br><span class="line">          threshold: <span class="number">10240</span>, <span class="comment">// 只有大小大于该值的资源会被处理 10240</span></span><br><span class="line">          test: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\.('</span> + [<span class="string">'js'</span>].join(<span class="string">'|'</span>) + <span class="string">')$'</span></span><br><span class="line">          ),</span><br><span class="line">          minRatio: <span class="number">0.8</span>, <span class="comment">// 只有压缩率小于这个值的资源才会被处理</span></span><br><span class="line">          deleteOriginalAssets: <span class="literal">false</span> <span class="comment">// 删除原文件</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 需要gzip压缩的文件</span></span><br><span class="line">   devServer: &#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8080</span>, <span class="comment">// 端口号</span></span><br><span class="line">    open: <span class="literal">false</span>, <span class="comment">// 配置自动启动浏览器</span></span><br><span class="line">    before (app, server) &#123;</span><br><span class="line">      app.get(<span class="regexp">/.*.(js)$/</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">        req.url = req.url + <span class="string">'.gz'</span></span><br><span class="line">        res.set(<span class="string">'Content-Encoding'</span>, <span class="string">'gzip'</span>)</span><br><span class="line">        next()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="配置全局sass无需再组件中引入即可使用"><a href="#配置全局sass无需再组件中引入即可使用" class="headerlink" title="配置全局sass无需再组件中引入即可使用"></a>配置全局sass无需再组件中引入即可使用</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  css: &#123;</span><br><span class="line">    extract: <span class="literal">true</span>,</span><br><span class="line">    sourceMap: <span class="literal">false</span>,</span><br><span class="line">    loaderOptions: &#123;</span><br><span class="line">      <span class="comment">// 定义全局scss无需引入即可使用</span></span><br><span class="line">      sass: &#123;</span><br><span class="line">        prependData: <span class="string">`</span></span><br><span class="line"><span class="string">          @import "@/assets/css/variable.scss";</span></span><br><span class="line"><span class="string">          @import "@/assets/css/common.scss";</span></span><br><span class="line"><span class="string">          @import "@/assets/css/mixin.scss";</span></span><br><span class="line"><span class="string">        `</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="公共代码抽离"><a href="#公共代码抽离" class="headerlink" title="公共代码抽离"></a>公共代码抽离</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">  </span><br><span class="line">    config.optimization = &#123;</span><br><span class="line">      splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">          vendor: &#123;</span><br><span class="line">            chunks: <span class="string">'all'</span>,</span><br><span class="line">            test: <span class="regexp">/node_modules/</span>,</span><br><span class="line">            name: <span class="string">'vendor'</span>,</span><br><span class="line">            minChunks: <span class="number">1</span>,</span><br><span class="line">            maxInitialRequests: <span class="number">5</span>,</span><br><span class="line">            minSize: <span class="number">0</span>,</span><br><span class="line">            priority: <span class="number">100</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="去除console-log"><a href="#去除console-log" class="headerlink" title="去除console.log()"></a>去除console.log()</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line"></span><br><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line"></span><br><span class="line">        config.plugins.push(</span><br><span class="line">          <span class="keyword">new</span> TerserPlugin(&#123;</span><br><span class="line">            terserOptions: &#123;</span><br><span class="line">              ecma: <span class="literal">undefined</span>,</span><br><span class="line">              warnings: <span class="literal">false</span>,</span><br><span class="line">              parse: &#123;&#125;,</span><br><span class="line">              compress: &#123;</span><br><span class="line">                drop_console: <span class="literal">true</span>,</span><br><span class="line">                drop_debugger: <span class="literal">false</span>,</span><br><span class="line">                pure_funcs: [<span class="string">'console.log'</span>] <span class="comment">// 移除console</span></span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;)</span><br><span class="line">        )</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h3><figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="comment">// vue.config.js配置</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// gzip压缩插件</span></span><br><span class="line"><span class="keyword">const</span> CompressionWebpackPlugin = <span class="built_in">require</span>(<span class="string">'compression-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 代码打包之后取出console.log压缩代码</span></span><br><span class="line"><span class="keyword">const</span> TerserPlugin = <span class="built_in">require</span>(<span class="string">'terser-webpack-plugin'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 图形化打包详情</span></span><br><span class="line"><span class="keyword">const</span> BundleAnalyzer = <span class="built_in">require</span>(<span class="string">'webpack-bundle-analyzer'</span>).BundleAnalyzerPlugin</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> cdn = &#123;</span><br><span class="line">  <span class="comment">// 忽略打包的第三方库</span></span><br><span class="line">  externals: &#123;</span><br><span class="line">    vue: <span class="string">'Vue'</span>,</span><br><span class="line">    vuex: <span class="string">'Vuex'</span>,</span><br><span class="line">    <span class="string">'vue-router'</span>: <span class="string">'VueRouter'</span>,</span><br><span class="line">    axios: <span class="string">'axios'</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 通过cdn方式使用</span></span><br><span class="line">  js: [</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vue/2.6.11/vue.runtime.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vue-router/3.1.2/vue-router.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/vuex/3.1.2/vuex.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/axios/0.19.2/axios.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/moment.js/2.24.0/moment.min.js'</span>,</span><br><span class="line">    <span class="string">'https://cdn.bootcss.com/echarts/3.7.1/echarts.min.js'</span></span><br><span class="line">  ],</span><br><span class="line">  css: []</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resolve</span> (<span class="params">dir</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> path.join(__dirname, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">  <span class="comment">// 是否触发eslint检查</span></span><br><span class="line">  lintOnSave: <span class="literal">false</span>,</span><br><span class="line">  publicPath: <span class="string">'/'</span>,</span><br><span class="line">  <span class="comment">// 打包文件的出口</span></span><br><span class="line">  outputDir: <span class="string">'dist'</span>,</span><br><span class="line">  <span class="comment">// 放置生成的css和js和img和fonts的目录</span></span><br><span class="line">  assetsDir: <span class="string">'static'</span>,</span><br><span class="line">  <span class="comment">// 存放index.html模板的路径</span></span><br><span class="line">  indexPath: <span class="string">'static/index.html'</span>,</span><br><span class="line">  productionSourceMap: <span class="literal">false</span>,</span><br><span class="line">  chainWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 配置cdn引入</span></span><br><span class="line">    config.plugin(<span class="string">'html'</span>).tap(<span class="function"><span class="params">args</span> =&gt;</span> &#123;</span><br><span class="line">      args[<span class="number">0</span>].cdn = cdn</span><br><span class="line">      <span class="keyword">return</span> args</span><br><span class="line">    &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 移除prefetch插件，避免加载多余的资源</span></span><br><span class="line">    config.plugins.delete(<span class="string">'prefetch'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 定义文件夹的路径</span></span><br><span class="line">    config.resolve.alias</span><br><span class="line">      .set(<span class="string">'@'</span>, resolve(<span class="string">'src'</span>))</span><br><span class="line">      .set(<span class="string">'assets'</span>, resolve(<span class="string">'src/assets'</span>))</span><br><span class="line">      .set(<span class="string">'components'</span>, resolve(<span class="string">'src/components'</span>))</span><br><span class="line">      .set(<span class="string">'router'</span>, resolve(<span class="string">'src/router'</span>))</span><br><span class="line">      .set(<span class="string">'store'</span>, resolve(<span class="string">'src/store'</span>))</span><br><span class="line">      .set(<span class="string">'views'</span>, resolve(<span class="string">'src/views'</span>))</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 压缩图片</span></span><br><span class="line">    <span class="keyword">const</span> imagesRule = config.module.rule(<span class="string">'images'</span>)</span><br><span class="line">    imagesRule.uses.clear()</span><br><span class="line">    imagesRule.use(<span class="string">'file-loader'</span>)</span><br><span class="line">      .loader(<span class="string">'url-loader'</span>)</span><br><span class="line">      .options(&#123;</span><br><span class="line">        limit: <span class="number">10240</span>,</span><br><span class="line">        fallback: &#123;</span><br><span class="line">          loader: <span class="string">'file-loader'</span>,</span><br><span class="line">          options: &#123;</span><br><span class="line">            outputPath: <span class="string">'static/images'</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 压缩响应的app.json返回的代码压缩</span></span><br><span class="line">    config.optimization.minimize(<span class="literal">true</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// webpack的配置</span></span><br><span class="line">  configureWebpack: <span class="function"><span class="params">config</span> =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 忽略打包配置</span></span><br><span class="line">    config.externals = cdn.externals</span><br><span class="line">    <span class="comment">// 生产环境配置</span></span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</span><br><span class="line">      <span class="comment">// 代码压缩去除console.log</span></span><br><span class="line">      config.plugins.push(</span><br><span class="line">        <span class="keyword">new</span> TerserPlugin(&#123;</span><br><span class="line">          terserOptions: &#123;</span><br><span class="line">            ecma: <span class="literal">undefined</span>,</span><br><span class="line">            warnings: <span class="literal">false</span>,</span><br><span class="line">            parse: &#123;&#125;,</span><br><span class="line">            compress: &#123;</span><br><span class="line">              drop_console: <span class="literal">true</span>,</span><br><span class="line">              drop_debugger: <span class="literal">false</span>,</span><br><span class="line">              pure_funcs: [<span class="string">'console.log'</span>] <span class="comment">// 移除console</span></span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 开启gzip压缩</span></span><br><span class="line">    config.plugins.push(</span><br><span class="line">      <span class="keyword">new</span> CompressionWebpackPlugin(</span><br><span class="line">        &#123;</span><br><span class="line">          filename: <span class="function"><span class="params">info</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="string">`<span class="subst">$&#123;info.path&#125;</span>.gz<span class="subst">$&#123;info.query&#125;</span>`</span></span><br><span class="line">          &#125;,</span><br><span class="line">          algorithm: <span class="string">'gzip'</span>,</span><br><span class="line">          threshold: <span class="number">10240</span>, <span class="comment">// 只有大小大于该值的资源会被处理 10240</span></span><br><span class="line">          test: <span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\.('</span> + [<span class="string">'js'</span>].join(<span class="string">'|'</span>) + <span class="string">')$'</span></span><br><span class="line">          ),</span><br><span class="line">          minRatio: <span class="number">0.8</span>, <span class="comment">// 只有压缩率小于这个值的资源才会被处理</span></span><br><span class="line">          deleteOriginalAssets: <span class="literal">false</span> <span class="comment">// 删除原文件</span></span><br><span class="line">        &#125;</span><br><span class="line">      )</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 展示打包图形化信息</span></span><br><span class="line">    config.plugins.push(</span><br><span class="line">      <span class="keyword">new</span> BundleAnalyzer()</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 公共代码抽离</span></span><br><span class="line">    config.optimization = &#123;</span><br><span class="line">      splitChunks: &#123;</span><br><span class="line">        cacheGroups: &#123;</span><br><span class="line">          vendor: &#123;</span><br><span class="line">            chunks: <span class="string">'all'</span>,</span><br><span class="line">            test: <span class="regexp">/node_modules/</span>,</span><br><span class="line">            name: <span class="string">'vendor'</span>,</span><br><span class="line">            minChunks: <span class="number">1</span>,</span><br><span class="line">            maxInitialRequests: <span class="number">5</span>,</span><br><span class="line">            minSize: <span class="number">0</span>,</span><br><span class="line">            priority: <span class="number">100</span></span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  css: &#123;</span><br><span class="line">    extract: <span class="literal">true</span>,</span><br><span class="line">    sourceMap: <span class="literal">false</span>,</span><br><span class="line">    loaderOptions: &#123;</span><br><span class="line">      <span class="comment">// 定义全局scss无需引入即可使用</span></span><br><span class="line">      sass: &#123;</span><br><span class="line">        prependData: <span class="string">`</span></span><br><span class="line"><span class="string">          @import "@/assets/css/variable.scss";</span></span><br><span class="line"><span class="string">          @import "@/assets/css/common.scss";</span></span><br><span class="line"><span class="string">          @import "@/assets/css/mixin.scss";</span></span><br><span class="line"><span class="string">        `</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 需要gzip压缩的文件</span></span><br><span class="line">  devServer: &#123;</span><br><span class="line">    host: <span class="string">'localhost'</span>,</span><br><span class="line">    port: <span class="number">8080</span>, <span class="comment">// 端口号</span></span><br><span class="line">    open: <span class="literal">false</span>, <span class="comment">// 配置自动启动浏览器</span></span><br><span class="line">    before (app, server) &#123;</span><br><span class="line">      app.get(<span class="regexp">/.*.(js)$/</span>, (req, res, next) =&gt; &#123;</span><br><span class="line">        req.url = req.url + <span class="string">'.gz'</span></span><br><span class="line">        res.set(<span class="string">'Content-Encoding'</span>, <span class="string">'gzip'</span>)</span><br><span class="line">        next()</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完结。</p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/11/06/多维数组根据某个值获取这个值对应的数组项，支持获取整个链条/" data-toggle="tooltip" data-placement="top" title="多维数组根据某个值获取这个值对应的数组项，支持获取整个链条">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+                <div id="comment"></div>
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#使用cdn引入不改变的第三方库"><span class="toc-text">使用cdn引入不改变的第三方库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#移除prefetch插件，避免加载多余的资源"><span class="toc-text">移除prefetch插件，避免加载多余的资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#定义目录的简写路径"><span class="toc-text">定义目录的简写路径</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#压缩图片"><span class="toc-text">压缩图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用gzip压缩"><span class="toc-text">使用gzip压缩</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#配置全局sass无需再组件中引入即可使用"><span class="toc-text">配置全局sass无需再组件中引入即可使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#公共代码抽离"><span class="toc-text">公共代码抽离</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#去除console-log"><span class="toc-text">去除console.log()</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#完整代码"><span class="toc-text">完整代码</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#Vue" title="Vue">Vue</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    var gitment = new Gitment({
+      id: window.location.pathname, // 可选。默认为 location.href
+      owner: 'tuohuang',
+      repo: '拓荒',
+      oauth: {
+        client_id: 'c7f46c8963dacc49fa66',
+        client_secret: '24152f450f927ed144e7a4c56208cdc8d88771e1',
+      },
+    })
+    gitment.render('comment')
+</script>
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <hr>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://github.com/tuohuang">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; tuohuang 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/blog.js"></script>
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://www.1024yun.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<!--<img class="wechat-title-img" src="https://storage.live.com/Users/-4156131552202647967/MyProfile/ExpressionProfile/ProfilePhoto:Win8Static,UserTileMedium,UserTileStatic">-->
+</body>
+
+</html>

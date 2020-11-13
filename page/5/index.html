@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://www.1024yun.com/page/2/">
+    <link rel="canonical" href="https://www.1024yun.com/page/5/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -328,197 +328,19 @@
 
 
 <div class="post-preview " style="background-image: url('https://cdn.1024yun.com/def_img.jpg')">
-    <a href="/2019/06/03/SPA单页面应用配置反向代理在本地调试微信公众号/">
+    <a href="/2017/03/23/npm默认安装目录修改/">
         <h2 class="post-title">
-            SPA单页面应用配置反向代理在本地调试微信公众号
+            npm默认安装目录修改
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-03
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-03-23
         </p>
         
         <div class="post-content-preview">
             <p>
-                微信公众号的开发需要在微信上设置安全域名，所以如果要本地开发，本地的项目域名也应该使用微信上配置的安全域名，刚开始以为只能在服务器端开发，在本地开发不行，就在测试服务器上搭建了nodejs环境，用VsCode新出的远程调试插件链接服务器进行开发，运行npm run dev 得到一个访问地址，然后..
-            </p>
-        </div>
-    </a>
+                查看所有全局安装的模块 npm ls -g查看npm默认设置（部分） npm config ls查看npm默认设置（全部） npm config ls -l以下两种方法来修改npm的默认安装目录
 
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/06/03/git合并分支时忽略合并部分文件/">
-        <h2 class="post-title">
-            git合并分支时忽略合并部分文件
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-06-03
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                最近在开发公司的H5和小程序以及微信公众号，H5和微信公众号代码基本上时一样的，但是公众号使用了一些微信的接口，例如：定位、上传图片、支付等等，总会和H5的代码有些不一样的地方，如果在代码里面做判断会把代码弄得比较乱，就在想可不可以用git将代码建成两个分支，当以后需要修改BUG或升级功能的时候..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/05/31/VUE等SPA单页面应用公众号授权登录和授权后页面返回的方案/">
-        <h2 class="post-title">
-            SPA应用公众号授权登录和授权后页面返回的方案
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-31
-        </p>
-        
-        <h3 class="post-subtitle">
-            VUE等SPA单页面应用公众号授权登录和授权后页面返回的方案
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                以前开发微信公众号授权登录都是由后端来完成，但是最近在开发单页面应用时，页面路由不走后台，在网上查找了一些资料，了解了授权登录的原理，便自己封装的一个前端授权登录的模块。授权登录比较顺利完成了，但是遇见了授权完成后返回页面的问题，由于授权成功后微信会跳转到用户设置的redirect_uri链接，..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/05/21/本地生成ssh公钥免密登录linux/">
-        <h2 class="post-title">
-            本地生成ssh公钥免密登录Linux
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-21
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                ssh是为远程登录提供的一个安全性的协议。使用它可以防止远程管理过程中的信息泄露问题。目前ssh普遍使用的有两种方式：
-
-基于口令的安全验证:经过验证帐号与密码即可登陆到远程主机。
-基于密钥的安全验证:需要在本地生成”密钥对”后将公钥传送至服务端，进行公共密钥的比较。
-
-使用密码验证终归会存在着..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/05/18/js获取当前时间戳的4种方法/">
-        <h2 class="post-title">
-            js获取当前时间戳的4种方法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                时间戳是1970/1/1 午夜距离一个时间的毫秒数
-
-Date.parse()的使用，Date.parse()可以返回一个给定时间和当前时间的时间戳
-// 返回给定时间时间戳Date.parse("2019/05/18")// 输出：1558108800000Date.parse("2019-0..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/05/18/html2canvas绘制图片时解决图片跨域问题/">
-        <h2 class="post-title">
-            html2canvas绘制图片时解决图片跨域问题
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-18
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                使用html2canvas添加{useCORS:true,logging:true}参数。
-html:&lt;div id="poster"&gt;    &lt;div&gt;这是文字&lt;div&gt;    &lt;img src="https://wx.qlogo.cn/mmopen/..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2019/05/17/SPA应用开启history模式的部署/">
-        <h2 class="post-title">
-            SPA应用开启history模式的部署
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2019-05-17
-        </p>
-        
-        <h3 class="post-subtitle">
-            SPA应用开启history模式且部署在二级目录下时nginx和apache服务器配置
-        </h3>
-        
-        <div class="post-content-preview">
-            <p>
-                修改vue的路由配置1、修改router.js文件中的mode为history模式，并且设置好对应的base选项（部署时目录的名称）export default new Router(&#123;    base: "/m/",    mode: "history",    routes: []..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-
-<div class="post-preview ">
-    <a href="/2017/12/02/移动端网页适配方案/">
-        <h2 class="post-title">
-            移动端网页适配最佳解决方案
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2017-12-02
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                之前也有一个常用的方案就是基于rem的原理，针对不同手机屏幕尺寸和dpr动态的改变根节点html的font-size大小(基准值)。这里我们提取了一个公式(rem表示基准值)rem = document.documentElement.clientWidth * dpr / 10
-说明：
-乘以d..
+使用命令 npm config set prefix &quot;D:\Program Files..
             </p>
         </div>
     </a>
@@ -535,13 +357,9 @@ html:&lt;div id="poster"&gt;    &lt;div&gt;这是文字&lt;div&gt;    &lt;img sr
 <ul class="pager">
     
     <li class="previous">
-        <a href="/">&larr; Newer Posts</a>
+        <a href="/page/4/">&larr; Newer Posts</a>
     </li>
     
-    
-    <li class="next">
-        <a href="/page/3/">Older Posts &rarr;</a>
-    </li>
     
 </ul>
 
