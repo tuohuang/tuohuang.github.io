@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,13 +25,19 @@
     <link rel="canonical" href="https://www.1024yun.com/2017/06/14/centos安装MySQL/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
 </head>
 
 <style>
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -92,16 +98,16 @@
                     
                         
 							
-                                
-                            
-						
-                    
-                        
-							
                         <li>
                             <a href="/tags/">标签</a>
                         </li>
 							
+						
+                    
+                        
+							
+                                
+                            
 						
                     
 					
@@ -191,7 +197,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                        <a class="tag" href="/tags/#MySQL"
+                           title="MySQL">MySQL</a>
                         
                     </div>
                 </div>
@@ -230,12 +237,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/06/15/jQuery插入元素的用法/" data-toggle="tooltip" data-placement="top" title="jQuery中的append和prepend，after和before的区别和用法">&larr; Previous Post</a>
+                        <a href="/2017/06/15/jQuery插入元素的用法/" data-toggle="tooltip" data-placement="top"
+                           title="jQuery中的append和prepend，after和before的区别和用法">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2017/06/10/office365申请/" data-toggle="tooltip" data-placement="top" title="免费申请企业级1年期Office 365订阅权限">Next Post &rarr;</a>
+                        <a href="/2017/06/10/office365申请/" data-toggle="tooltip" data-placement="top"
+                           title="免费申请企业级1年期Office 365订阅权限">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -248,7 +257,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-下载mysql的repo源"><span class="toc-text">1. 下载mysql的repo源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-安装mysql-community-release-el7-5-noarch-rpm包"><span class="toc-text">2. 安装mysql-community-release-el7-5.noarch.rpm包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-安装mysql"><span class="toc-text">3. 安装mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-安装完之后重启一下mysql服务："><span class="toc-text">4. 安装完之后重启一下mysql服务：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-输入mysql-没有设置用户和密码就可以直接连接-就可以连接到服务器"><span class="toc-text">5. 输入mysql(没有设置用户和密码就可以直接连接)就可以连接到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-重置密码"><span class="toc-text">6. 重置密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-用新密码重新连接MySQL"><span class="toc-text">7. 用新密码重新连接MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-创建普通用户并授权-安装后默认一个账号是root-如果打算用root账户则可以不创建新用户"><span class="toc-text">8. 创建普通用户并授权(安装后默认一个账号是root,如果打算用root账户则可以不创建新用户)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-设置任何机器都可以访问MySQL"><span class="toc-text">9. 设置任何机器都可以访问MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-设置开机启动"><span class="toc-text">10. 设置开机启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-设置最大连接数"><span class="toc-text">11. 设置最大连接数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-设置白名单"><span class="toc-text">12. 设置白名单</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%8B%E8%BD%BDmysql%E7%9A%84repo%E6%BA%90"><span class="toc-text">1. 下载mysql的repo源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%89%E8%A3%85mysql-community-release-el7-5-noarch-rpm%E5%8C%85"><span class="toc-text">2. 安装mysql-community-release-el7-5.noarch.rpm包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AE%89%E8%A3%85mysql"><span class="toc-text">3. 安装mysql</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%AE%89%E8%A3%85%E5%AE%8C%E4%B9%8B%E5%90%8E%E9%87%8D%E5%90%AF%E4%B8%80%E4%B8%8Bmysql%E6%9C%8D%E5%8A%A1%EF%BC%9A"><span class="toc-text">4. 安装完之后重启一下mysql服务：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%BE%93%E5%85%A5mysql-%E6%B2%A1%E6%9C%89%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7%E5%92%8C%E5%AF%86%E7%A0%81%E5%B0%B1%E5%8F%AF%E4%BB%A5%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5-%E5%B0%B1%E5%8F%AF%E4%BB%A5%E8%BF%9E%E6%8E%A5%E5%88%B0%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">5. 输入mysql(没有设置用户和密码就可以直接连接)就可以连接到服务器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E9%87%8D%E7%BD%AE%E5%AF%86%E7%A0%81"><span class="toc-text">6. 重置密码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E7%94%A8%E6%96%B0%E5%AF%86%E7%A0%81%E9%87%8D%E6%96%B0%E8%BF%9E%E6%8E%A5MySQL"><span class="toc-text">7. 用新密码重新连接MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-%E5%88%9B%E5%BB%BA%E6%99%AE%E9%80%9A%E7%94%A8%E6%88%B7%E5%B9%B6%E6%8E%88%E6%9D%83-%E5%AE%89%E8%A3%85%E5%90%8E%E9%BB%98%E8%AE%A4%E4%B8%80%E4%B8%AA%E8%B4%A6%E5%8F%B7%E6%98%AFroot-%E5%A6%82%E6%9E%9C%E6%89%93%E7%AE%97%E7%94%A8root%E8%B4%A6%E6%88%B7%E5%88%99%E5%8F%AF%E4%BB%A5%E4%B8%8D%E5%88%9B%E5%BB%BA%E6%96%B0%E7%94%A8%E6%88%B7"><span class="toc-text">8. 创建普通用户并授权(安装后默认一个账号是root,如果打算用root账户则可以不创建新用户)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-%E8%AE%BE%E7%BD%AE%E4%BB%BB%E4%BD%95%E6%9C%BA%E5%99%A8%E9%83%BD%E5%8F%AF%E4%BB%A5%E8%AE%BF%E9%97%AEMySQL"><span class="toc-text">9. 设置任何机器都可以访问MySQL</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-%E8%AE%BE%E7%BD%AE%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8"><span class="toc-text">10. 设置开机启动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-%E8%AE%BE%E7%BD%AE%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0"><span class="toc-text">11. 设置最大连接数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#12-%E8%AE%BE%E7%BD%AE%E7%99%BD%E5%90%8D%E5%8D%95"><span class="toc-text">12. 设置白名单</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -270,7 +279,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#MySQL" title="MySQL">MySQL</a>
+                        <a class="tag" href="/tags/#MySQL"
+                           title="MySQL">MySQL</a>
                         
                     </div>
                 </section>
@@ -330,7 +340,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/tuohuang">
+                        <a target="_blank"  href="https://github.com/tuohuang">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -341,7 +351,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                        <a target="_blank"  href="https://www.linkedin.com/in/xingqizheng">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -352,7 +362,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; tuohuang 2020
+                    Copyright &copy; tuohuang 2021
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                 </p>
@@ -363,13 +373,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>

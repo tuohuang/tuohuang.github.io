@@ -2,7 +2,7 @@
 <html lang="en">
 
 <!-- Head tag -->
-<head><meta name="generator" content="Hexo 3.8.0">
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,13 +25,19 @@
     <link rel="canonical" href="https://www.1024yun.com/2017/04/16/ShadowSocks-for-linux-server/">
 
     <!-- Bootstrap Core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/css/blog-style.css">
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
 
     <!-- Pygments Github CSS -->
-    <link rel="stylesheet" href="/css/syntax.css">
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
 </head>
 
 <style>
@@ -43,8 +49,8 @@
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="" class="animated fadeIn">
 <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost="true" data-istags="false
-" data-ishome="false">
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header page-scroll">
@@ -92,16 +98,16 @@
                     
                         
 							
-                                
-                            
-						
-                    
-                        
-							
                         <li>
                             <a href="/tags/">标签</a>
                         </li>
 							
+						
+                    
+                        
+							
+                                
+                            
 						
                     
 					
@@ -191,7 +197,8 @@
                     </span>
                     <div class="tags text-center">
                         
-                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        <a class="tag" href="/tags/#Other"
+                           title="Other">Other</a>
                         
                     </div>
                 </div>
@@ -222,12 +229,14 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2017/04/24/shadowsocks-for-windows-server/" data-toggle="tooltip" data-placement="top" title="windows 下搭建shadowsocks 服务端">&larr; Previous Post</a>
+                        <a href="/2017/04/24/shadowsocks-for-windows-server/" data-toggle="tooltip" data-placement="top"
+                           title="windows 下搭建shadowsocks 服务端">&larr; Previous Post</a>
                     </li>
                     
                     
                     <li class="next">
-                        <a href="/2017/04/07/javascript-api/" data-toggle="tooltip" data-placement="top" title="原生JS中DOM节点相关API合集">Next Post &rarr;</a>
+                        <a href="/2017/04/07/javascript-api/" data-toggle="tooltip" data-placement="top"
+                           title="原生JS中DOM节点相关API合集">Next Post &rarr;</a>
                     </li>
                     
                 </ul>
@@ -240,7 +249,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1、安装ShadowSocks"><span class="toc-text">1、安装ShadowSocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2、创建配置文件-etc-shadowsocks-json"><span class="toc-text">2、创建配置文件/etc/shadowsocks.json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、使用配置文件在后台运行shadowsocks服务"><span class="toc-text">3、使用配置文件在后台运行shadowsocks服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4、停止服务"><span class="toc-text">4、停止服务</span></a></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AE%89%E8%A3%85ShadowSocks"><span class="toc-text">1、安装ShadowSocks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E5%88%9B%E5%BB%BA%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-etc-shadowsocks-json"><span class="toc-text">2、创建配置文件&#x2F;etc&#x2F;shadowsocks.json</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E5%9C%A8%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8Cshadowsocks%E6%9C%8D%E5%8A%A1"><span class="toc-text">3、使用配置文件在后台运行shadowsocks服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E5%81%9C%E6%AD%A2%E6%9C%8D%E5%8A%A1"><span class="toc-text">4、停止服务</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -262,7 +271,8 @@
                     </h5>
                     <div class="tags">
                         
-                        <a class="tag" href="/tags/#Other" title="Other">Other</a>
+                        <a class="tag" href="/tags/#Other"
+                           title="Other">Other</a>
                         
                     </div>
                 </section>
@@ -322,7 +332,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://github.com/tuohuang">
+                        <a target="_blank"  href="https://github.com/tuohuang">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -333,7 +343,7 @@
 
                 
                     <li>
-                        <a target="_blank" href="https://www.linkedin.com/in/xingqizheng">
+                        <a target="_blank"  href="https://www.linkedin.com/in/xingqizheng">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
@@ -344,7 +354,7 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; tuohuang 2020
+                    Copyright &copy; tuohuang 2021
                     <br>
                     <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
                 </p>
@@ -355,13 +365,19 @@
 </footer>
 
 <!-- jQuery -->
+
 <script src="/js/jquery.min.js"></script>
 
+
 <!-- Bootstrap Core JavaScript -->
+
 <script src="/js/bootstrap.min.js"></script>
 
+
 <!-- Custom Theme JavaScript -->
+
 <script src="/js/blog.js"></script>
+
 
 <!-- async load function -->
 <script>
